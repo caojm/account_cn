@@ -1,0 +1,84 @@
+<odoo>
+  <template id="subsidiary_ledger">
+    <t t-call="web.html_container">
+      <div class="page">
+        <!-- Report content -->
+        <div class="container">
+
+          <table class="table table-bordered border-dark caption-top">
+            <caption class="text-dark">
+              <table width="100%" class="table-borderless">
+                <col width="30%" />
+                <col width="30%" />
+                <col width="30%" />
+                <tbody>
+                  <tr class="text-center">
+                    <td colspan="3"><h3>明细分类账</h3></td>
+                  </tr>
+                  <tr>
+                    <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
+                    <td class="text-center align-bottom"><div>币别：综合本位币</div></td>
+                    <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </caption>
+            <col width="10%" />
+            <col width="10%" />
+            <col width="30%" />
+            <col width="15%" />
+            <col width="15%" />
+            <col width="5%" />
+            <col width="15%" />
+            <thead>
+              <tr class="text-center align-middle">
+                <th>日期</th>
+                <th>凭证字号</th>
+                <th>摘要</th>
+                <th>借方金额</th>
+                <th>贷方金额</th>
+                <th>方向</th>
+                <th>余额</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="subsidiary_ledger" t-as="sl">
+                <tr>
+                  <td><span t-out="time.strftime('%Y-%m-%d', time.strptime(sl['date'], '%d %b %Y'))"></span></td>
+                  <td><span t-att-res-id="sl['voucher_id']" res-model="account.cn.voucher" view-type="form"> <t t-out="sl['voucher_word_number']" /></span></td>
+                  <td><span> <t t-out="sl['summary']" /></span></td>
+                  <td>
+                    <span>
+                      <t t-if="sl['debit'] == 0.0" />
+                      <t t-else="" t-out="sl['debit']" />
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <t t-if="sl['credit'] == 0.0" />
+                      <t t-else="" t-out="sl['credit']" />
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <t t-if="sl['balance'] > 0.0">借</t>
+                      <t t-elif="sl['balance'] &lt; 0.0">贷</t>
+                      <t t-else="">平</t>
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <t t-if="sl['balance'] > 0.0" t-out="sl['balance']" />
+                      <t t-elif="sl['balance'] &lt; 0.0" t-out="-sl['balance']" />
+                      <t t-else="" />
+                    </span>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

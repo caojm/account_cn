@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+  <menuitem id="account_cn_menu_root" name="Chinese Accounting">
+    <menuitem id="account_cn_voucher_menu" name="Voucher">
+      <menuitem id="account_cn_account_voucher_menu" action="account_cn_voucher_action"/>
+      <menuitem id="account_cn_account_voucher_line_menu" action="account_cn_voucher_line_action"/>
+    </menuitem>
+    <menuitem id="account_cn_reporting_menu" name="Reporting">
+      <menuitem id="account_cn_subsidiary_ledger_menu" action="action_subsidiary_ledger_wizard"/>
+      <menuitem id="account_cn_balance_sheet_menu" action="action_balance_sheet_wizard"/>
+    </menuitem>
+    <menuitem id="account_cn_settings_menu" name="Settings">
+      <menuitem id="account_cn_voucher_word_menu" action="account_cn_voucher_word_action"/>
+      <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action"/>
+      <menuitem id="account_cn_report_settings_menu" name="Report Settings">
+        <menuitem id="account_cn_report_model_menu" action="account_cn_report_model_action"/>
+        <menuitem id="account_cn_report_item_menu" action="account_cn_report_item_action"/>
+        <menuitem id="account_cn_report_filter_menu" action="account_cn_report_filter_action"/>
+        <menuitem id="account_cn_report_measure_menu" action="account_cn_report_measure_action"/>
+      </menuitem>
+    </menuitem>
+  </menuitem>
+</odoo>

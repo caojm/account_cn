@@ -1,0 +1,11 @@
+<odoo>
+  <record id="action_account_cn_voucher_report" model="ir.actions.report">
+    <field name="name">Accounting Voucher</field>
+    <field name="model">account.cn.voucher</field>
+    <field name="report_type">qweb-html</field>
+    <field name="report_name">account_cn.accounting_voucher</field>
+    <field name="binding_model_id" ref="model_account_cn_voucher" />
+    <field name="binding_type">report</field>
+  </record>
+</odoo>
+

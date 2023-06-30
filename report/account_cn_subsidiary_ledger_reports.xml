@@ -1,0 +1,9 @@
+<odoo>
+  <record id="action_account_cn_subsidiary_ledger_report" model="ir.actions.report">
+    <field name="name">Subsidiary Ledger</field>
+    <field name="model">subsidiary.ledger.wizard</field>
+    <field name="report_type">qweb-html</field>
+    <field name="report_name">account_cn.subsidiary_ledger</field>
+  </record>
+</odoo>
+

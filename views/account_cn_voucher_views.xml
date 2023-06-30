@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="account_cn_voucher_action" model="ir.actions.act_window">
+    <field name="name">Accounting Voucher</field>
+    <field name="res_model">account.cn.voucher</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="account_cn_voucher_view_tree" model="ir.ui.view">
+    <field name="name">Accounting Voucher Tree</field>
+    <field name="model">account.cn.voucher</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="date"/>
+        <field name="word_id"/>
+        <field name="number"/>
+        <field name="amount_total" sum="Total"/>
+        <field name="attachment"/>
+        <field name="accounting_book_id" optional="hide"/>
+        <field name="company_id" optional="hide"/>
+      </tree>
+    </field>
+  </record>
+  <record id="account_cn_voucher_view_form" model="ir.ui.view">
+    <field name="name">Accounting Voucher Form</field>
+    <field name="model">account.cn.voucher</field>
+    <field name="arch" type="xml">
+      <form string="Accounting Voucher">
+        <header>
+        </header>
+        <sheet>
+          <h1 class="text-center">
+            <p><span>记账凭证</span></p>
+          </h1>
+          <group>
+            <group>
+              <field name="company_id" />
+              <field name="accounting_book_id" />
+              <field name="date" />
+            </group>
+            <group>
+              <field name="word_id" />
+              <field name="number" />
+              <field name="attachment" />
+            </group>
+            <notebook>
+              <page string="Entries">
+                <field name="line_ids" />
+              </page>
+            </notebook>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

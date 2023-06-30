@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="account_cn_accounting_book_action" model="ir.actions.act_window">
+    <field name="name">Accounting Book</field>
+    <field name="res_model">account.cn.accounting.book</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="account_cn_accounting_book_view_tree" model="ir.ui.view">
+    <field name="name">Accounting Book Tree</field>
+    <field name="model">account.cn.accounting.book</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="company_id"/>
+        <field name="code"/>
+        <field name="name"/>
+        <field name="currency_id"/>
+      </tree>
+    </field>
+  </record>
+  <record id="account_cn_accounting_book_view_form" model="ir.ui.view">
+    <field name="name">Accounting Book Form</field>
+    <field name="model">account.cn.accounting.book</field>
+    <field name="arch" type="xml">
+      <form string="Accounting Book">
+        <header>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="code" />
+              <field name="name" />
+            </group>
+            <group>
+              <field name="currency_id"/>
+              <field name="company_id" />
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

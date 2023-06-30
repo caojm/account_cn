@@ -1,0 +1,105 @@
+<odoo>
+  <template id="accounting_voucher">
+    <t t-call="web.html_container">
+      <t t-call="web.external_layout">
+        <t t-foreach="docs" t-as="o">
+          <div class="page">
+            <!-- Report content -->
+            <div class="container">
+
+              <table class="table table-bordered border-dark caption-top">
+                <caption class="text-dark">
+                  <table width="100%" class="table-borderless">
+                    <col width="30%" />
+                    <col width="30%" />
+                    <col width="30%" />
+                    <tbody>
+                      <tr class="text-center">
+                        <td colspan="3"><h3>记账凭证</h3></td>
+                      </tr>
+                      <tr>
+                        <td class="text-start align-bottom"><span t-field="o.company_id" /></td>
+                        <td class="text-center align-bottom"><span t-field="o.date" t-options="{'widget': 'date'}" /></td>
+                        <td class="text-end align-bottom"><div>附件<span t-field="o.attachment" />张<br/><span t-field="o.word_id" />字 第<span t-field="o.number" />号</div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </caption>
+                <col class="col" />
+                <col class="col" />
+                <col class="col-2" />
+                <col class="col-2" />
+                <thead>
+                  <tr class="text-center align-middle">
+                    <th><span style="letter-spacing: 2rem">摘</span>要</th>
+                    <th>会计科目</th>
+                    <th>借方金额</th>
+                    <th>贷方金额</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <t t-foreach="o.line_ids" t-as="line">
+                    <tr>
+                      <td><span t-field="line.summary" /></td>
+                      <td><span t-att-res-id="line.id" res-model="account.cn.voucher.line" view-type="form" t-field="line.account_id" /></td>
+                      <td class="text-end"><t t-if="line.debit"><span t-field="line.debit" /></t></td>
+                      <td class="text-end"><t t-if="line.credit"><span t-field="line.credit" /></t></td>
+                    </tr>
+                  </t>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                  <tr>
+                    <td>摘要</td>
+                    <td>会计科目</td>
+                    <td>借方金额</td>
+                    <td>贷方金额</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+</odoo>

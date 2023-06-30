@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="account_cn_voucher_line_action" model="ir.actions.act_window">
+    <field name="name">Voucher Entries</field>
+    <field name="res_model">account.cn.voucher.line</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="account_cn_voucher_line_view_tree" model="ir.ui.view">
+    <field name="name">Entry Tree</field>
+    <field name="model">account.cn.voucher.line</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="summary"/>
+        <field name="account_id"/>
+        <field name="partner_id"/>
+        <field name="currency_id"/>
+        <field name="debit"/>
+        <field name="credit"/>
+        <field name="accounting_book_id" optional="hide"/>
+        <field name="company_id" optional="hide"/>
+      </tree>
+    </field>
+  </record>
+  <record id="account_cn_voucher_line_view_form" model="ir.ui.view">
+    <field name="name">Entry Form</field>
+    <field name="model">account.cn.voucher.line</field>
+    <field name="arch" type="xml">
+      <form string="Account Voucher">
+        <sheet>
+          <group>
+            <field name="summary"/>
+            <field name="account_id"/>
+            <field name="partner_id"/>
+            <field name="currency_id"/>
+            <field name="debit"/>
+            <field name="credit"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

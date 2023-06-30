@@ -1,0 +1,377 @@
+<odoo>
+  <template id="balance_sheet">
+    <t t-call="web.html_container">
+      <div class="page">
+        <!-- Report content -->
+        <div class="container">
+
+          <table class="table table-bordered border-dark caption-top">
+            <caption class="text-dark">
+              <table width="100%" class="table-borderless">
+                <col width="30%" />
+                <col width="30%" />
+                <col width="30%" />
+                <tbody>
+                  <tr class="text-center">
+                    <td colspan="3"><h3>资产负债表</h3></td>
+                  </tr>
+                  <tr>
+                    <td class="text-start align-bottom"><div>公司名称：<span t-out="data['company_name']" /></div></td>
+                    <td class="text-center align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
+                    <td class="text-end align-bottom"><div>币别：综合本位币</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </caption>
+            <col width="20%" />
+            <col width="15%" />
+            <col width="15%" />
+            <col width="20%" />
+            <col width="15%" />
+            <col width="15%" />
+            <thead>
+              <tr class="text-center align-middle">
+                <th>资产</th>
+                <th>期初余额</th>
+                <th>期末余额</th>
+                <th>负债和所有者权益</th>
+                <th>期初余额</th>
+                <th>期末余额</th>
+              </tr>
+            </thead>
+            <tbody class="align-middle">
+              <tr>
+                <td><t t-out="bs_data['1A']"/></td>
+                <td><t t-out="bs_data['1B']"/></td>
+                <td><t t-out="bs_data['1C']"/></td>
+                <td><t t-out="bs_data['1D']"/></td>
+                <td><t t-out="bs_data['1E']"/></td>
+                <td><t t-out="bs_data['1F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['2A']"/></td>
+                <td><t t-out="bs_data['2B']"/></td>
+                <td><t t-out="bs_data['2C']"/></td>
+                <td><t t-out="bs_data['2D']"/></td>
+                <td><t t-out="bs_data['2E']"/></td>
+                <td><t t-out="bs_data['2F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['3A']"/></td>
+                <td><t t-out="bs_data['3B']"/></td>
+                <td><t t-out="bs_data['3C']"/></td>
+                <td><t t-out="bs_data['3D']"/></td>
+                <td><t t-out="bs_data['3E']"/></td>
+                <td><t t-out="bs_data['3F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['4A']"/></td>
+                <td><t t-out="bs_data['4B']"/></td>
+                <td><t t-out="bs_data['4C']"/></td>
+                <td><t t-out="bs_data['4D']"/></td>
+                <td><t t-out="bs_data['4E']"/></td>
+                <td><t t-out="bs_data['4F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['5A']"/></td>
+                <td><t t-out="bs_data['5B']"/></td>
+                <td><t t-out="bs_data['5C']"/></td>
+                <td><t t-out="bs_data['5D']"/></td>
+                <td><t t-out="bs_data['5E']"/></td>
+                <td><t t-out="bs_data['5F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['6A']"/></td>
+                <td><t t-out="bs_data['6B']"/></td>
+                <td><t t-out="bs_data['6C']"/></td>
+                <td><t t-out="bs_data['6D']"/></td>
+                <td><t t-out="bs_data['6E']"/></td>
+                <td><t t-out="bs_data['6F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['7A']"/></td>
+                <td><t t-out="bs_data['7B']"/></td>
+                <td><t t-out="bs_data['7C']"/></td>
+                <td><t t-out="bs_data['7D']"/></td>
+                <td><t t-out="bs_data['7E']"/></td>
+                <td><t t-out="bs_data['7F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['8A']"/></td>
+                <td><t t-out="bs_data['8B']"/></td>
+                <td><t t-out="bs_data['8C']"/></td>
+                <td><t t-out="bs_data['8D']"/></td>
+                <td><t t-out="bs_data['8E']"/></td>
+                <td><t t-out="bs_data['8F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['9A']"/></td>
+                <td><t t-out="bs_data['9B']"/></td>
+                <td><t t-out="bs_data['9C']"/></td>
+                <td><t t-out="bs_data['9D']"/></td>
+                <td><t t-out="bs_data['9E']"/></td>
+                <td><t t-out="bs_data['9F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['10A']"/></td>
+                <td><t t-out="bs_data['10B']"/></td>
+                <td><t t-out="bs_data['10C']"/></td>
+                <td><t t-out="bs_data['10D']"/></td>
+                <td><t t-out="bs_data['10E']"/></td>
+                <td><t t-out="bs_data['10F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['11A']"/></td>
+                <td><t t-out="bs_data['11B']"/></td>
+                <td><t t-out="bs_data['11C']"/></td>
+                <td><t t-out="bs_data['11D']"/></td>
+                <td><t t-out="bs_data['11E']"/></td>
+                <td><t t-out="bs_data['11F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['12A']"/></td>
+                <td><t t-out="bs_data['12B']"/></td>
+                <td><t t-out="bs_data['12C']"/></td>
+                <td><t t-out="bs_data['12D']"/></td>
+                <td><t t-out="bs_data['12E']"/></td>
+                <td><t t-out="bs_data['12F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['13A']"/></td>
+                <td><t t-out="bs_data['13B']"/></td>
+                <td><t t-out="bs_data['13C']"/></td>
+                <td><t t-out="bs_data['13D']"/></td>
+                <td><t t-out="bs_data['13E']"/></td>
+                <td><t t-out="bs_data['13F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['14A']"/></td>
+                <td><t t-out="bs_data['14B']"/></td>
+                <td><t t-out="bs_data['14C']"/></td>
+                <td><t t-out="bs_data['14D']"/></td>
+                <td><t t-out="bs_data['14E']"/></td>
+                <td><t t-out="bs_data['14F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['15A']"/></td>
+                <td><t t-out="bs_data['15B']"/></td>
+                <td><t t-out="bs_data['15C']"/></td>
+                <td><t t-out="bs_data['15D']"/></td>
+                <td><t t-out="bs_data['15E']"/></td>
+                <td><t t-out="bs_data['15F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['16A']"/></td>
+                <td><t t-out="bs_data['16B']"/></td>
+                <td><t t-out="bs_data['16C']"/></td>
+                <td><t t-out="bs_data['16D']"/></td>
+                <td><t t-out="bs_data['16E']"/></td>
+                <td><t t-out="bs_data['16F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['17A']"/></td>
+                <td><t t-out="bs_data['17B']"/></td>
+                <td><t t-out="bs_data['17C']"/></td>
+                <td><t t-out="bs_data['17D']"/></td>
+                <td><t t-out="bs_data['17E']"/></td>
+                <td><t t-out="bs_data['17F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['18A']"/></td>
+                <td><t t-out="bs_data['18B']"/></td>
+                <td><t t-out="bs_data['18C']"/></td>
+                <td><t t-out="bs_data['18D']"/></td>
+                <td><t t-out="bs_data['18E']"/></td>
+                <td><t t-out="bs_data['18F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['19A']"/></td>
+                <td><t t-out="bs_data['19B']"/></td>
+                <td><t t-out="bs_data['19C']"/></td>
+                <td><t t-out="bs_data['19D']"/></td>
+                <td><t t-out="bs_data['19E']"/></td>
+                <td><t t-out="bs_data['19F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['20A']"/></td>
+                <td><t t-out="bs_data['20B']"/></td>
+                <td><t t-out="bs_data['20C']"/></td>
+                <td><t t-out="bs_data['20D']"/></td>
+                <td><t t-out="bs_data['20E']"/></td>
+                <td><t t-out="bs_data['20F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['21A']"/></td>
+                <td><t t-out="bs_data['21B']"/></td>
+                <td><t t-out="bs_data['21C']"/></td>
+                <td><t t-out="bs_data['21D']"/></td>
+                <td><t t-out="bs_data['21E']"/></td>
+                <td><t t-out="bs_data['21F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['22A']"/></td>
+                <td><t t-out="bs_data['22B']"/></td>
+                <td><t t-out="bs_data['22C']"/></td>
+                <td><t t-out="bs_data['22D']"/></td>
+                <td><t t-out="bs_data['22E']"/></td>
+                <td><t t-out="bs_data['22F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['23A']"/></td>
+                <td><t t-out="bs_data['23B']"/></td>
+                <td><t t-out="bs_data['23C']"/></td>
+                <td><t t-out="bs_data['23D']"/></td>
+                <td><t t-out="bs_data['23E']"/></td>
+                <td><t t-out="bs_data['23F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['24A']"/></td>
+                <td><t t-out="bs_data['24B']"/></td>
+                <td><t t-out="bs_data['24C']"/></td>
+                <td><t t-out="bs_data['24D']"/></td>
+                <td><t t-out="bs_data['24E']"/></td>
+                <td><t t-out="bs_data['24F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['25A']"/></td>
+                <td><t t-out="bs_data['25B']"/></td>
+                <td><t t-out="bs_data['25C']"/></td>
+                <td><t t-out="bs_data['25D']"/></td>
+                <td><t t-out="bs_data['25E']"/></td>
+                <td><t t-out="bs_data['25F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['26A']"/></td>
+                <td><t t-out="bs_data['26B']"/></td>
+                <td><t t-out="bs_data['26C']"/></td>
+                <td><t t-out="bs_data['26D']"/></td>
+                <td><t t-out="bs_data['26E']"/></td>
+                <td><t t-out="bs_data['26F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['27A']"/></td>
+                <td><t t-out="bs_data['27B']"/></td>
+                <td><t t-out="bs_data['27C']"/></td>
+                <td><t t-out="bs_data['27D']"/></td>
+                <td><t t-out="bs_data['27E']"/></td>
+                <td><t t-out="bs_data['27F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['28A']"/></td>
+                <td><t t-out="bs_data['28B']"/></td>
+                <td><t t-out="bs_data['28C']"/></td>
+                <td><t t-out="bs_data['28D']"/></td>
+                <td><t t-out="bs_data['28E']"/></td>
+                <td><t t-out="bs_data['28F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['29A']"/></td>
+                <td><t t-out="bs_data['29B']"/></td>
+                <td><t t-out="bs_data['29C']"/></td>
+                <td><t t-out="bs_data['29D']"/></td>
+                <td><t t-out="bs_data['29E']"/></td>
+                <td><t t-out="bs_data['29F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['30A']"/></td>
+                <td><t t-out="bs_data['30B']"/></td>
+                <td><t t-out="bs_data['30C']"/></td>
+                <td><t t-out="bs_data['30D']"/></td>
+                <td><t t-out="bs_data['30E']"/></td>
+                <td><t t-out="bs_data['30F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['31A']"/></td>
+                <td><t t-out="bs_data['31B']"/></td>
+                <td><t t-out="bs_data['31C']"/></td>
+                <td><t t-out="bs_data['31D']"/></td>
+                <td><t t-out="bs_data['31E']"/></td>
+                <td><t t-out="bs_data['31F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['32A']"/></td>
+                <td><t t-out="bs_data['32B']"/></td>
+                <td><t t-out="bs_data['32C']"/></td>
+                <td><t t-out="bs_data['32D']"/></td>
+                <td><t t-out="bs_data['32E']"/></td>
+                <td><t t-out="bs_data['32F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['33A']"/></td>
+                <td><t t-out="bs_data['33B']"/></td>
+                <td><t t-out="bs_data['33C']"/></td>
+                <td><t t-out="bs_data['33D']"/></td>
+                <td><t t-out="bs_data['33E']"/></td>
+                <td><t t-out="bs_data['33F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['34A']"/></td>
+                <td><t t-out="bs_data['34B']"/></td>
+                <td><t t-out="bs_data['34C']"/></td>
+                <td><t t-out="bs_data['34D']"/></td>
+                <td><t t-out="bs_data['34E']"/></td>
+                <td><t t-out="bs_data['34F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['35A']"/></td>
+                <td><t t-out="bs_data['35B']"/></td>
+                <td><t t-out="bs_data['35C']"/></td>
+                <td><t t-out="bs_data['35D']"/></td>
+                <td><t t-out="bs_data['35E']"/></td>
+                <td><t t-out="bs_data['35F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['36A']"/></td>
+                <td><t t-out="bs_data['36B']"/></td>
+                <td><t t-out="bs_data['36C']"/></td>
+                <td><t t-out="bs_data['36D']"/></td>
+                <td><t t-out="bs_data['36E']"/></td>
+                <td><t t-out="bs_data['36F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['37A']"/></td>
+                <td><t t-out="bs_data['37B']"/></td>
+                <td><t t-out="bs_data['37C']"/></td>
+                <td><t t-out="bs_data['37D']"/></td>
+                <td><t t-out="bs_data['37E']"/></td>
+                <td><t t-out="bs_data['37F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['38A']"/></td>
+                <td><t t-out="bs_data['38B']"/></td>
+                <td><t t-out="bs_data['38C']"/></td>
+                <td><t t-out="bs_data['38D']"/></td>
+                <td><t t-out="bs_data['38E']"/></td>
+                <td><t t-out="bs_data['38F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['39A']"/></td>
+                <td><t t-out="bs_data['39B']"/></td>
+                <td><t t-out="bs_data['39C']"/></td>
+                <td><t t-out="bs_data['39D']"/></td>
+                <td><t t-out="bs_data['39E']"/></td>
+                <td><t t-out="bs_data['39F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['40A']"/></td>
+                <td><t t-out="bs_data['40B']"/></td>
+                <td><t t-out="bs_data['40C']"/></td>
+                <td><t t-out="bs_data['40D']"/></td>
+                <td><t t-out="bs_data['40E']"/></td>
+                <td><t t-out="bs_data['40F']"/></td>
+              </tr>
+              <tr>
+                <td><t t-out="bs_data['41A']"/></td>
+                <td><t t-out="bs_data['41B']"/></td>
+                <td><t t-out="bs_data['41C']"/></td>
+                <td><t t-out="bs_data['41D']"/></td>
+                <td><t t-out="bs_data['41E']"/></td>
+                <td><t t-out="bs_data['41F']"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

@@ -10,6 +10,7 @@
     <field name="model">account.cn.voucher.line</field>
     <field name="arch" type="xml">
       <tree editable="bottom">
+        <field name="sequence" widget="handle"/>
         <field name="summary"/>
         <field name="account_id"/>
         <field name="partner_id"/>
@@ -25,8 +26,9 @@
     <field name="name">Entry Form</field>
     <field name="model">account.cn.voucher.line</field>
     <field name="arch" type="xml">
-      <form string="Account Voucher">
+      <form string="Voucher Item">
         <sheet>
+          <field name="company_id" invisible="1"/>
           <group>
             <field name="summary"/>
             <field name="account_id"/>

@@ -1,9 +1,9 @@
 from odoo import fields, models
 
 
-class AbstractWizard(models.AbstractModel):
-    _name = "abstract.wizard"
-    _description = "Abstract Wizard"
+class ReportAbstractWizard(models.AbstractModel):
+    _name = "report.abstract.wizard"
+    _description = "Report Abstract Wizard"
 
     company_id = fields.Many2one(
         comodel_name="res.company",

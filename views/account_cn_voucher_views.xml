@@ -26,10 +26,11 @@
     <field name="arch" type="xml">
       <form string="Accounting Voucher">
         <header>
+          <field name="state" widget="statusbar"/>
         </header>
         <sheet>
           <h1 class="text-center">
-            <p><span>记账凭证</span></p>
+            <p><span><field name="name_id" /></span></p>
           </h1>
           <group>
             <group>

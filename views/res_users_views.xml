@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_users_form_simple_modif_accounting" model="ir.ui.view">
+    <field name="name">res.users.preferences.form.accounting</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+    <field name="arch" type="xml">
+      <notebook position="inside">
+        <page name="accounting" string="Accounting Settings">
+          <group>
+            <group string="Voucher">
+              <field name="accounting_book_id"/>
+              <field name="voucher_type_id"/>
+              <field name="voucher_word_id"/>
+            </group>
+            <group name="managers" string="Approvers" class="hide-group-if-empty">
+              <!-- overridden in other modules -->
+            </group>
+          </group>
+        </page>
+      </notebook>
+    </field>
+  </record>
+</odoo>

@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, exceptions, fields, models, _
 
 
 class AccountCnVoucher(models.Model):
@@ -6,6 +6,7 @@ class AccountCnVoucher(models.Model):
     _description = "Accounting Voucher"
     _check_company_auto = True
 
+    active = fields.Boolean(default=True)
     company_id = fields.Many2one(
         "res.company",
         required=True,
@@ -37,8 +38,9 @@ class AccountCnVoucher(models.Model):
         default=lambda self: self.env.user.voucher_word_id,
         check_company=True,
     )
-    name_id = fields.Many2one(
+    voucher_type_id = fields.Many2one(
         "account.cn.voucher.type",
+        required=True,
         default=lambda self: self.env.user.voucher_type_id,
     )
     number = fields.Char(
@@ -47,17 +49,20 @@ class AccountCnVoucher(models.Model):
         readonly=False,
     )
     attachment = fields.Integer()
+    stage_id = fields.Many2one(
+        "account.cn.voucher.stage",
+        compute="_compute_stage_id",
+        store=True,
+        readonly=False,
+        group_expand="_group_expand_stage_id",
+        domain="[('voucher_type_id', '=', voucher_type_id)]",
+    )
     state = fields.Selection(
-        selection=[
-            ("draft", "Draft"),
-            ("posted", "Posted"),
-            ("cancel", "Cancelled"),
-        ],
+        related="stage_id.state",
         string="Status",
-        required=True,
-        readonly=True,
-        copy=False,
-        default="draft",
+    )
+    next_stage = fields.Char(
+        compute="_compute_next_stage",
     )
     amount_total = fields.Monetary(
         string="Amount",
@@ -71,6 +76,29 @@ class AccountCnVoucher(models.Model):
         "voucher_id",
         string="Entries",
         copy=True,
+    )
+    accounting_supervisor_id = fields.Many2one(
+        related="accounting_book_id.accounting_supervisor_id",
+    )
+    poster_id = fields.Many2one(
+        "res.users",
+        readonly=True,
+        copy=False,
+    )
+    casher_id = fields.Many2one(
+        "res.users",
+        readonly=True,
+        copy=False,
+    )
+    checker_id = fields.Many2one(
+        "res.users",
+        readonly=True,
+        copy=False,
+    )
+    preparer_id = fields.Many2one(
+        "res.users",
+        readonly=True,
+        copy=False,
     )
 
     @api.depends(
@@ -98,7 +126,121 @@ class AccountCnVoucher(models.Model):
     )
     def _compute_number(self):
         seq = self.word_id.voucher_number_sequence_id._get_current_sequence(self.date)
-        self.number = seq.sequence_id.get_next_char(seq.number_next_actual)
+        if seq:
+            self.number = seq.sequence_id.get_next_char(seq.number_next_actual)
+
+    def do_next_stage(self):
+        for voucher in self:
+            if voucher.stage_id:
+                stages = voucher._stage_find(
+                    voucher.voucher_type_id.id,
+                    domain=[("sequence", ">=", voucher.stage_id.sequence)],
+                    limit=2,
+                )
+                if len(stages) == 2:
+                    voucher.stage_id = stages[1]
+                    voucher._set_signature()
+                else:
+                    continue
+
+    def undo_next_stage(self):
+        for voucher in self:
+            if voucher.stage_id:
+                stages = voucher._stage_find(
+                    voucher.voucher_type_id.id,
+                    order="sequence desc, id desc",
+                    domain=[("sequence", "<=", voucher.stage_id.sequence)],
+                    limit=2,
+                )
+                if len(stages) == 2:
+                    voucher._unset_signature()
+                    voucher.stage_id = stages[1]
+                else:
+                    continue
+
+    def _stage_find(
+        self, voucher_type_id=False, domain=None, order="sequence, id", limit=1
+    ):
+        if voucher_type_id:
+            search_domain = [("voucher_type_id", "=", voucher_type_id)]
+        if domain:
+            search_domain += domain
+        return self.env["account.cn.voucher.stage"].search(
+            search_domain, order=order, limit=limit
+        )
+
+    def _set_signature(self):
+        for voucher in self:
+            if voucher.stage_id.state == "prepared":
+                voucher.preparer_id = self.env.user
+            elif voucher.stage_id.state == "checked":
+                voucher.checker_id = self.env.user
+            elif voucher.stage_id.state == "signed":
+                voucher.casher_id = self.env.user
+            elif voucher.stage_id.state == "posted":
+                voucher.poster_id = self.env.user
+            else:
+                continue
+
+    def _unset_signature(self):
+        for voucher in self:
+            if voucher.stage_id.state == "prepared":
+                voucher.preparer_id = False
+            elif voucher.stage_id.state == "checked":
+                voucher.checker_id = False
+            elif voucher.stage_id.state == "signed":
+                voucher.casher_id = False
+            elif voucher.stage_id.state == "posted":
+                voucher.poster_id = False
+            else:
+                continue
+
+    @api.depends("voucher_type_id")
+    def _compute_stage_id(self):
+        for voucher in self:
+            if voucher.voucher_type_id:
+                if voucher.voucher_type_id != voucher.stage_id.voucher_type_id:
+                    voucher.stage_id = voucher._stage_find(
+                        voucher.voucher_type_id.id, [("fold", "=", False)]
+                    )
+            else:
+                voucher.stage_id = False
+
+    def _group_expand_stage_id(self, stages, domain, order):
+        print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+        print(self)
+        print(stages)
+        print(domain)
+        print(order)
+        dm = [
+            (
+                "id",
+                "in",
+                [
+                    self.env.ref("account_cn.stage_draft").id,
+                    self.env.ref("account_cn.stage_prepared").id,
+                    self.env.ref("account_cn.stage_checked").id,
+                    self.env.ref("account_cn.stage_signed").id,
+                    self.env.ref("account_cn.stage_posted").id,
+                ],
+            )
+        ]
+        print(dm)
+        return stages.search(dm, order=order)
+
+    @api.depends("stage_id")
+    def _compute_next_stage(self):
+        for voucher in self:
+            if voucher.stage_id:
+                stages = voucher._stage_find(
+                    voucher.voucher_type_id.id,
+                    domain=[("sequence", ">=", voucher.stage_id.sequence)],
+                    limit=2,
+                )
+                if len(stages) == 2:
+                    voucher.next_stage = stages[1].state
+                else:
+                    voucher.next_stage = False
 
     @api.model
     def create(self, vals):

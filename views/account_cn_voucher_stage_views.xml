@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="account_cn_voucher_stage_action" model="ir.actions.act_window">
+    <field name="name">Voucher Stage</field>
+    <field name="res_model">account.cn.voucher.stage</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <record id="account_cn_voucher_stage_view_tree" model="ir.ui.view">
+    <field name="name">Stage Tree</field>
+    <field name="model">account.cn.voucher.stage</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="sequence" widget="handle"/>
+        <field name="code"/>
+        <field name="name"/>
+        <field name="voucher_type_id"/>
+        <field name="state" optional="hide"/>
+        <field name="fold" optional="hide"/>
+      </tree>
+    </field>
+  </record>
+  <record id="account_cn_voucher_stage_view_form" model="ir.ui.view">
+    <field name="name">Stage Form</field>
+    <field name="model">account.cn.voucher.stage</field>
+    <field name="arch" type="xml">
+      <form string="Voucher Stage">
+        <sheet>
+          <group>
+            <group>
+              <field name="code"/>
+              <field name="name"/>
+              <field name="state"/>
+            </group>
+            <group>
+              <field name="voucher_type_id"/>
+              <field name="sequence"/>
+              <field name="fold"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

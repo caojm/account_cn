@@ -6,39 +6,61 @@
     <field name="arch" type="xml">
       <form>
         <group>
+          <group>
             <field name="word_id" />
-            <field name="sequence_id" invisible="1" />
-            <field name="date_range_ids">
-              <!-- <tree> -->
-              <!--   <field name="date_from" /> -->
-              <!--   <field name="date_to" /> -->
-              <!--   <field name="sequence_id" /> -->
-              <!-- </tree> -->
-            </field>
+            <field name="posted_only" />
+          </group>
+          <group>
+            <field name="continuation" />
+            <field name="starting_number" attrs="{'invisible': [('continuation', '=', True)]}"/>
+          </group>
         </group>
-        <footer>
-          <button
-            name="renumber_voucher"
-            string="Renumber"
-            type="object"
-            default_focus="1"
-            class="oe_highlight"
-            />
-          
-          <button
-            string="Cancel"
-            class="oe_link"
-            special="cancel"
-            />
-        </footer>
-      </form>
-    </field>
-  </record>
-  <record id="action_renumber_voucher_wizard" model="ir.actions.act_window">
-    <field name="name">Renumber Voucher</field>
-    <field name="res_model">renumber.voucher.wizard</field>
-    <field name="view_mode">form</field>
-    <field name="view_id" ref="renumber_voucher_wizard" />
-    <field name="target">new</field>
-  </record>
-</odoo>
+        <group>
+          <field name="sequence_id" invisible="1" />
+          <field name="date_range_ids">
+            <tree>
+              <field name="date_from" />
+              <field name="date_to" />
+              <field name="number_next_actual" />
+              <field name="sequence_id" />
+            </tree>
+          </field>
+          <!-- <field name="numbering" -->
+            <!--   attrs="{'invisible': ['|', ('accounting_book_ids', '=', []), ('voucher_type_ids', '=', [])]}" -->
+            <!--   /> -->
+          </group>
+          <group>
+            <group>
+              <field name="accounting_book_id" />
+            </group>
+            <group>
+              <field name="voucher_type_id" />
+            </group>
+          </group>
+          <footer>
+            <button
+              name="renumber_voucher"
+              string="Renumber"
+              type="object"
+              default_focus="1"
+              class="oe_highlight"
+              confirm="This operation is irreversible. Continue?"
+              />
+
+            <button
+              string="Cancel"
+              class="oe_link"
+              special="cancel"
+              />
+          </footer>
+        </form>
+      </field>
+    </record>
+    <record id="action_renumber_voucher_wizard" model="ir.actions.act_window">
+      <field name="name">Renumber Voucher</field>
+      <field name="res_model">renumber.voucher.wizard</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="renumber_voucher_wizard" />
+      <field name="target">new</field>
+    </record>
+  </odoo>

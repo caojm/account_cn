@@ -10,6 +10,11 @@ class AccountCnAccountingBook(models.Model):
         required=True,
         default=lambda self: self.env.company,
     )
-    code = fields.Char()
-    name = fields.Char()
+    code = fields.Char(
+        required=True,
+    )
+    name = fields.Char(
+        required=True,
+    )
     currency_id = fields.Many2one("res.currency")
+    accounting_supervisor_id = fields.Many2one("res.users")

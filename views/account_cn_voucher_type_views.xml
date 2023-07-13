@@ -9,9 +9,11 @@
     <field name="name">Type Tree</field>
     <field name="model">account.cn.voucher.type</field>
     <field name="arch" type="xml">
-      <tree editable="bottom">
+      <tree>
         <field name="code"/>
         <field name="name"/>
+        <field name="voucher_stage_ids" widget="many2many_tags"/>
+        <field name="company_id" optional="hide"/>
       </tree>
     </field>
   </record>
@@ -22,8 +24,24 @@
       <form string="Voucher Type">
         <sheet>
           <group>
-            <field name="code"/>
-            <field name="name"/>
+            <group>
+              <field name="code"/>
+              <field name="name"/>
+            </group>
+            <group>
+              <field name="company_id"/>
+            </group>
+            <field name="voucher_stage_ids">
+              <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="state" optional="hide"/>
+                <field name="fold" optional="hide"/>
+                <field name="voucher_type_id" optional="hide"/>
+                <field name="company_id" optional="hide"/>
+              </tree>
+            </field>
           </group>
         </sheet>
       </form>

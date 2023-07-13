@@ -10,5 +10,12 @@ class AccountCnVoucherType(models.Model):
         required=True,
         default=lambda self: self.env.company,
     )
-    code = fields.Char()
+    code = fields.Char(
+        required=True,
+    )
     name = fields.Char()
+    voucher_stage_ids = fields.One2many(
+        "account.cn.voucher.stage",
+        "voucher_type_id",
+        copy=True,
+    )

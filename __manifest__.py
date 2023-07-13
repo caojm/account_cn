@@ -14,6 +14,7 @@
         "views/account_cn_voucher_views.xml",
         "views/account_cn_voucher_word_views.xml",
         "views/account_cn_voucher_type_views.xml",
+        "views/account_cn_voucher_stage_views.xml",
         "views/account_cn_voucher_line_views.xml",
         "views/account_cn_report_filter_views.xml",
         "views/account_cn_report_item_views.xml",
@@ -22,7 +23,6 @@
         "views/account_cn_accounting_book_views.xml",
         "views/res_company_views.xml",
         "views/res_users_views.xml",
-        "views/account_cn_menus.xml",
         "views/ir_sequence_date_range_views.xml",
         "report/account_cn_voucher_reports.xml",
         "report/account_cn_voucher_templates.xml",
@@ -33,6 +33,8 @@
         "wizard/subsidiary_ledger_wizard_view.xml",
         "wizard/balance_sheet_wizard_view.xml",
         "wizard/renumber_voucher_wizard_view.xml",
+        "views/account_cn_menus.xml",
+        "data/account_cn_voucher_stage.xml",
     ],
     # data files containing optionally loaded demonstration data
     "demo": [

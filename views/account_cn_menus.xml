@@ -14,6 +14,7 @@
       <menuitem id="account_cn_configuration_voucher_menu" name="Voucher">
         <menuitem id="account_cn_voucher_word_menu" action="account_cn_voucher_word_action"/>
         <menuitem id="account_cn_voucher_type_menu" action="account_cn_voucher_type_action"/>
+        <menuitem id="account_cn_voucher_stage_menu" action="account_cn_voucher_stage_action"/>
         <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action"/>
       </menuitem>
       <menuitem id="account_cn_configuration_report_menu" name="Report">

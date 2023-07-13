@@ -10,10 +10,11 @@
     <field name="model">account.cn.accounting.book</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="company_id"/>
         <field name="code"/>
         <field name="name"/>
+        <field name="accounting_supervisor_id"/>
         <field name="currency_id"/>
+        <field name="company_id" optional="hide"/>
       </tree>
     </field>
   </record>
@@ -29,6 +30,7 @@
             <group>
               <field name="code" />
               <field name="name" />
+              <field name="accounting_supervisor_id"/>
             </group>
             <group>
               <field name="currency_id"/>

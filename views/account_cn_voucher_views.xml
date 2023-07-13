@@ -9,7 +9,7 @@
     <field name="name">Accounting Voucher Tree</field>
     <field name="model">account.cn.voucher</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree default_order="date, id">
         <field name="date"/>
         <field name="word_id"/>
         <field name="number"/>
@@ -26,11 +26,31 @@
     <field name="arch" type="xml">
       <form string="Accounting Voucher">
         <header>
-          <field name="state" widget="statusbar"/>
+          <!-- <button name="do_next_stage" string="Confirm" class="btn_secondary" type="object" data-hotkey="m"/> -->
+          <!-- <button name="undo_next_stage" string="Un-Confirm" class="btn_secondary" type="object" data-hotkey="shift+m"/> -->
+          <!-- <button name="do_next_stage" string="Check" class="btn_secondary" type="object" data-hotkey="k"/> -->
+          <!-- <button name="undo_next_stage" string="Un-Check" class="btn_secondary" type="object" data-hotkey="shift+k"/> -->
+          <!-- <button name="do_next_stage" string="Sign" class="btn_secondary" type="object" data-hotkey="i"/> -->
+          <!-- <button name="undo_next_stage" string="Un-Sign" class="btn_secondary" type="object" data-hotkey="shift+i"/> -->
+          <!-- <button name="do_next_stage" string="Post" class="btn_secondary" type="object" data-hotkey="t"/> -->
+          <!-- <button name="undo_next_stage" string="Un-Post" class="btn_secondary" type="object" data-hotkey="shift+t"/> -->
+          
+          <field name="next_stage" invisible="1"/>
+          <field name="state" invisible="1"/>
+          <button name="do_next_stage" string="Confirm" class="oe_highlight" type="object" data-hotkey="m" attrs="{'invisible': [('next_stage', '!=', 'prepared')]}"/>
+          <button name="do_next_stage" string="Check" class="oe_highlight" type="object" data-hotkey="k" attrs="{'invisible': [('next_stage', '!=', 'checked')]}"/>
+          <button name="do_next_stage" string="Sign" class="oe_highlight" type="object" data-hotkey="i" attrs="{'invisible': [('next_stage', '!=', 'signed')]}"/>
+          <button name="do_next_stage" string="Post" class="oe_highlight" type="object" data-hotkey="t" attrs="{'invisible': [('next_stage', '!=', 'posted')]}"/>
+          <button name="undo_next_stage" string="Un-Confirm" class="btn_secondary" type="object" data-hotkey="shift+m" states="prepared"/>
+          <button name="undo_next_stage" string="Un-Check" class="btn_secondary" type="object" data-hotkey="shift+k" states="checked"/>
+          <button name="undo_next_stage" string="Un-Sign" class="btn_secondary" type="object" data-hotkey="shift+i" states="signed"/>
+          <button name="undo_next_stage" string="Un-Post" class="btn_secondary" type="object" data-hotkey="shift+t" states="posted"/>
+          <!-- <field name="state" widget="statusbar" statusbar_visible="draft, posted"/> -->
+          <field name="stage_id" widget="statusbar"/>
         </header>
         <sheet>
           <h1 class="text-center">
-            <p><span><field name="name_id" /></span></p>
+            <p><span><field name="voucher_type_id" /></span></p>
           </h1>
           <group>
             <group>
@@ -46,6 +66,25 @@
             <notebook>
               <page string="Entries">
                 <field name="line_ids" />
+              </page>
+              <page string="Signature">
+                <group>
+                  <group>
+                    <field name="accounting_supervisor_id" />
+                  </group>
+                  <group>
+                    <field name="preparer_id" />
+                  </group>
+                  <group>
+                    <field name="checker_id" />
+                  </group>
+                  <group>
+                    <field name="casher_id" />
+                  </group>
+                  <group>
+                    <field name="poster_id" />
+                  </group>
+                </group>
               </page>
             </notebook>
           </group>

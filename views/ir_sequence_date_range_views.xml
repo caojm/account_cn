@@ -7,6 +7,7 @@
       <tree>
         <field name="date_from" />
         <field name="date_to" />
+        <field name="number_next_actual" />
         <field name="sequence_id" />
       </tree>
     </field>

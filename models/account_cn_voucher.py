@@ -1,4 +1,5 @@
 from odoo import api, exceptions, fields, models, _
+from odoo.exceptions import UserError
 
 
 class AccountCnVoucher(models.Model):
@@ -57,12 +58,19 @@ class AccountCnVoucher(models.Model):
         group_expand="_group_expand_stage_id",
         domain="[('voucher_type_id', '=', voucher_type_id)]",
     )
+    first_stage = fields.Many2one(
+        "account.cn.voucher.stage",
+        compute="_compute_first_stage",
+    )
+    is_first_stage = fields.Boolean(
+        compute="_compute_first_stage",
+    )
     state = fields.Selection(
         related="stage_id.state",
         string="Status",
     )
-    next_stage = fields.Char(
-        compute="_compute_next_stage",
+    next_state = fields.Char(
+        compute="_compute_next_state",
     )
     amount_total = fields.Monetary(
         string="Amount",
@@ -158,6 +166,14 @@ class AccountCnVoucher(models.Model):
                 else:
                     continue
 
+    def reject_stage(self):
+        for voucher in self:
+            voucher.stage_id = voucher.first_stage
+            voucher.preparer_id = False
+            voucher.checker_id = False
+            voucher.casher_id = False
+            voucher.poster_id = False
+
     def _stage_find(
         self, voucher_type_id=False, domain=None, order="sequence, id", limit=1
     ):
@@ -229,7 +245,7 @@ class AccountCnVoucher(models.Model):
         return stages.search(dm, order=order)
 
     @api.depends("stage_id")
-    def _compute_next_stage(self):
+    def _compute_next_state(self):
         for voucher in self:
             if voucher.stage_id:
                 stages = voucher._stage_find(
@@ -237,10 +253,16 @@ class AccountCnVoucher(models.Model):
                     domain=[("sequence", ">=", voucher.stage_id.sequence)],
                     limit=2,
                 )
-                if len(stages) == 2:
-                    voucher.next_stage = stages[1].state
-                else:
-                    voucher.next_stage = False
+                voucher.next_state = stages[1].state if len(stages) == 2 else False
+
+    @api.depends("voucher_type_id.voucher_stage_ids.sequence")
+    def _compute_first_stage(self):
+        for voucher in self:
+            if voucher.voucher_type_id.voucher_stage_ids:
+                voucher.first_stage = voucher._stage_find(voucher.voucher_type_id.id)
+                voucher.is_first_stage = (
+                    True if voucher.stage_id == voucher.first_stage else False
+                )
 
     @api.model
     def create(self, vals):
@@ -268,3 +290,23 @@ class AccountCnVoucher(models.Model):
             else:
                 vals["number"] = self.number
         super().write(vals)
+
+    @api.constrains("line_ids")
+    def _check_balanced(self):
+        for voucher in self:
+            balance = sum(voucher.line_ids.mapped("debit")) - sum(
+                voucher.line_ids.mapped("credit")
+            )
+            if balance:
+                error_msg = _("The voucher %s is not balanced.", voucher.display_name)
+                raise UserError(error_msg)
+
+    @api.constrains("line_ids")
+    def _check_entry_count(self):
+        for voucher in self:
+            count = len(voucher.line_ids)
+            if count < 2:
+                error_msg = _(
+                    "Two or more entries of voucher %s is needed.", voucher.display_name
+                )
+                raise UserError(error_msg)

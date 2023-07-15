@@ -14,7 +14,9 @@
         <field name="word_id"/>
         <field name="number"/>
         <field name="amount_total" sum="Total"/>
-        <field name="attachment"/>
+        <field name="state" invisible="1"/>
+        <field name="stage_id" widget="badge" decoration-muted="state == 'draft'" decoration-success="state == 'posted'" decoration-warning="state not in ('draft', 'posted')" optional="show" />
+        <field name="attachment" optional="hide"/>
         <field name="accounting_book_id" optional="hide"/>
         <field name="company_id" optional="hide"/>
       </tree>
@@ -34,17 +36,19 @@
           <!-- <button name="undo_next_stage" string="Un-Sign" class="btn_secondary" type="object" data-hotkey="shift+i"/> -->
           <!-- <button name="do_next_stage" string="Post" class="btn_secondary" type="object" data-hotkey="t"/> -->
           <!-- <button name="undo_next_stage" string="Un-Post" class="btn_secondary" type="object" data-hotkey="shift+t"/> -->
-          
-          <field name="next_stage" invisible="1"/>
+
+          <field name="is_first_stage" invisible="1"/>
+          <field name="next_state" invisible="1"/>
           <field name="state" invisible="1"/>
-          <button name="do_next_stage" string="Confirm" class="oe_highlight" type="object" data-hotkey="m" attrs="{'invisible': [('next_stage', '!=', 'prepared')]}"/>
-          <button name="do_next_stage" string="Check" class="oe_highlight" type="object" data-hotkey="k" attrs="{'invisible': [('next_stage', '!=', 'checked')]}"/>
-          <button name="do_next_stage" string="Sign" class="oe_highlight" type="object" data-hotkey="i" attrs="{'invisible': [('next_stage', '!=', 'signed')]}"/>
-          <button name="do_next_stage" string="Post" class="oe_highlight" type="object" data-hotkey="t" attrs="{'invisible': [('next_stage', '!=', 'posted')]}"/>
+          <button name="do_next_stage" string="Confirm" class="oe_highlight" type="object" data-hotkey="m" attrs="{'invisible': [('next_state', '!=', 'prepared')]}"/>
+          <button name="do_next_stage" string="Check" class="oe_highlight" type="object" data-hotkey="k" attrs="{'invisible': [('next_state', '!=', 'checked')]}"/>
+          <button name="do_next_stage" string="Sign" class="oe_highlight" type="object" data-hotkey="i" attrs="{'invisible': [('next_state', '!=', 'signed')]}"/>
+          <button name="do_next_stage" string="Post" class="oe_highlight" type="object" data-hotkey="t" attrs="{'invisible': [('next_state', '!=', 'posted')]}"/>
           <button name="undo_next_stage" string="Un-Confirm" class="btn_secondary" type="object" data-hotkey="shift+m" states="prepared"/>
           <button name="undo_next_stage" string="Un-Check" class="btn_secondary" type="object" data-hotkey="shift+k" states="checked"/>
           <button name="undo_next_stage" string="Un-Sign" class="btn_secondary" type="object" data-hotkey="shift+i" states="signed"/>
           <button name="undo_next_stage" string="Un-Post" class="btn_secondary" type="object" data-hotkey="shift+t" states="posted"/>
+          <button name="reject_stage" string="Reject" class="btn_secondary" type="object" attrs="{'invisible': [('is_first_stage', '=', True)]}"/>
           <!-- <field name="state" widget="statusbar" statusbar_visible="draft, posted"/> -->
           <field name="stage_id" widget="statusbar"/>
         </header>
@@ -65,7 +69,21 @@
             </group>
             <notebook>
               <page string="Entries">
-                <field name="line_ids" />
+                <field name="line_ids">
+                  <tree editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="summary"/>
+                    <field name="account_id"/>
+                    <field name="partner_id"/>
+                    <field name="currency_id" optional="hide"/>
+                    <field name="amount_currency" optional="hide"/>
+                    <field name="book_currency_id" invisible="1"/>
+                    <field name="debit" sum="Total Debit"/>
+                    <field name="credit" sum="Total Credit"/>
+                    <field name="accounting_book_id" optional="hide"/>
+                    <field name="company_id" optional="hide"/>
+                  </tree>
+                </field>
               </page>
               <page string="Signature">
                 <group>

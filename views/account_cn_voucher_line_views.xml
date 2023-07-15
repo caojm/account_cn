@@ -9,8 +9,7 @@
     <field name="name">Entry Tree</field>
     <field name="model">account.cn.voucher.line</field>
     <field name="arch" type="xml">
-      <tree editable="bottom">
-        <field name="sequence" widget="handle"/>
+      <tree>
         <field name="summary"/>
         <field name="account_id"/>
         <field name="partner_id"/>

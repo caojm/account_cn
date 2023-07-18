@@ -13,6 +13,8 @@
         <field name="date"/>
         <field name="word_id"/>
         <field name="number"/>
+        <field name="book_currency_id" invisible="1"/>
+        <!-- <field name="book_currency_id"/> -->
         <field name="amount_total" sum="Total"/>
         <field name="state" invisible="1"/>
         <field name="stage_id" widget="badge" decoration-muted="state == 'draft'" decoration-success="state == 'posted'" decoration-warning="state not in ('draft', 'posted')" optional="show" />
@@ -75,6 +77,7 @@
                     <field name="summary"/>
                     <field name="account_id"/>
                     <field name="partner_id"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" optional="hide"/>
                     <field name="currency_id" optional="hide"/>
                     <field name="amount_currency" optional="hide"/>
                     <field name="book_currency_id" invisible="1"/>

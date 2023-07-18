@@ -16,5 +16,8 @@ class AccountCnAccountingBook(models.Model):
     name = fields.Char(
         required=True,
     )
-    currency_id = fields.Many2one("res.currency")
+    currency_id = fields.Many2one(
+        "res.currency",
+        required=True,
+    )
     accounting_supervisor_id = fields.Many2one("res.users")

@@ -5,7 +5,7 @@
         <!-- Report content -->
         <div class="container">
 
-          <t t-if="not data['distinguish_partner']">
+          <t t-if="data[distinguish_partner]">
             <table class="table table-bordered border-dark caption-top">
               <col width="10%" />
               <col width="10%" />

@@ -8,11 +8,22 @@
         <group>
           <group>
             <field name="account_id" />
-          </group>
-          <group>
+            <field name="currency_id" />
             <field name="date_from" />
             <field name="date_to" />
           </group>
+          <group>
+            <field name="posted_only" />
+            <field name="exact_match" />
+          </group>
+        </group>
+        <group>
+          <field name="distinguish_partner" />
+          <field name="partner_ids" widget="many2many_tags" attrs="{'invisible': [('distinguish_partner', '!=', True)], 'required': [('distinguish_partner', '=', True)]}"/>
+          <field name="accounting_book_ids" widget="many2many_tags"/>
+          <field name="company_ids" widget="many2many_tags"/>
+          <field name="voucher_type_ids" widget="many2many_tags"/>
+          <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
         </group>
         <footer>
           <button
@@ -22,7 +33,7 @@
             default_focus="1"
             class="oe_highlight"
             />
-          
+
           <button
             string="Cancel"
             class="oe_link"

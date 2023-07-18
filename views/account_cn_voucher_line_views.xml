@@ -13,9 +13,12 @@
         <field name="summary"/>
         <field name="account_id"/>
         <field name="partner_id"/>
-        <field name="currency_id"/>
-        <field name="debit"/>
-        <field name="credit"/>
+        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" optional="hide"/>
+        <field name="currency_id" optional="hide"/>
+        <field name="amount_currency" optional="hide"/>
+        <field name="book_currency_id" invisible="1"/>
+        <field name="debit" sum="Total Debit"/>
+        <field name="credit" sum="Total Credit"/>
         <field name="accounting_book_id" optional="hide"/>
         <field name="company_id" optional="hide"/>
       </tree>
@@ -27,14 +30,18 @@
     <field name="arch" type="xml">
       <form string="Voucher Item">
         <sheet>
-          <field name="company_id" invisible="1"/>
           <group>
             <field name="summary"/>
             <field name="account_id"/>
             <field name="partner_id"/>
-            <field name="currency_id"/>
-            <field name="debit"/>
-            <field name="credit"/>
+            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            <field name="currency_id" />
+            <field name="amount_currency" />
+            <field name="book_currency_id" invisible="1"/>
+            <field name="debit" sum="Total Debit"/>
+            <field name="credit" sum="Total Credit"/>
+            <field name="accounting_book_id" />
+            <field name="company_id" />
           </group>
         </sheet>
       </form>

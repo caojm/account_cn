@@ -10,21 +10,26 @@ class AccountCnVoucherLine(models.Model):
     voucher_id = fields.Many2one("account.cn.voucher")
     company_id = fields.Many2one(
         related="voucher_id.company_id",
+        store=True,
     )
     accounting_book_id = fields.Many2one(
         related="voucher_id.accounting_book_id",
+        store=True,
     )
     book_currency_id = fields.Many2one(
         related="accounting_book_id.currency_id",
     )
     date = fields.Date(
         related="voucher_id.date",
+        store=True,
     )
     voucher_word = fields.Many2one(
         related="voucher_id.word_id",
+        store=True,
     )
-    voucher_number = fields.Char(
+    voucher_number = fields.Integer(
         related="voucher_id.number",
+        store=True,
     )
     voucher_state = fields.Selection(
         related="voucher_id.state",
@@ -67,6 +72,9 @@ class AccountCnVoucherLine(models.Model):
     )
     sequence = fields.Integer(
         default=1,
+    )
+    tag_ids = fields.Many2many(
+        "account.cn.voucher.tag",
     )
 
     @api.depends("voucher_id")

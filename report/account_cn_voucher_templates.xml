@@ -1,104 +1,127 @@
 <odoo>
   <template id="accounting_voucher">
     <t t-call="web.html_container">
-      <t t-foreach="docs" t-as="o">
-        <div class="article" data-oe-lang="en_US">
-
-          <!-- Report content -->
+      <div class="article">
+        <t t-foreach="docs" t-as="o">
           <div class="container">
-
-            <table class="table table-bordered border-dark caption-top">
-              <caption class="text-dark">
-                <table width="100%" class="table-borderless">
-                  <col width="30%" />
-                  <col width="30%" />
-                  <col width="30%" />
-                  <tbody>
-                    <tr class="text-center">
-                      <td colspan="3"><h3>记账凭证</h3></td>
-                    </tr>
-                    <tr>
-                      <td class="text-start align-bottom"><span t-field="o.company_id" /></td>
-                      <td class="text-center align-bottom"><span t-field="o.date" t-options="{'widget': 'date'}" /></td>
-                      <td class="text-end align-bottom"><div>附件<span t-field="o.attachment" />张<br/><span t-field="o.word_id" />字 第<span t-field="o.number" />号</div></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </caption>
-              <col class="col" />
-              <col class="col" />
-              <col class="col-2" />
-              <col class="col-2" />
-              <thead>
-                <tr class="text-center align-middle">
-                  <th><span style="letter-spacing: 2rem">摘</span>要</th>
-                  <th>会计科目</th>
-                  <th>借方金额</th>
-                  <th>贷方金额</th>
-                </tr>
-              </thead>
-              <tbody>
-                <t t-foreach="o.line_ids" t-as="line">
-                  <tr>
-                    <td><span t-field="line.summary" /></td>
-                    <td><span t-att-res-id="line.id" res-model="account.cn.voucher.line" view-type="form" t-field="line.account_id" /></td>
-                    <td class="text-end"><t t-if="line.debit"><span t-field="line.debit" /></t></td>
-                    <td class="text-end"><t t-if="line.credit"><span t-field="line.credit" /></t></td>
+            <t t-set="total_lines" t-value="len(o.line_ids)"/>
+            <t t-set="page_lines" t-value="6"/>
+            <t t-set="pages" t-value="total_lines // page_lines + 1 if total_lines % page_lines else total_lines // page_lines"/>
+            <t t-set="lines" t-value="o.line_ids"/>
+            <t t-set="cur_line" t-value="0"/>
+            <t t-set="total_debit" t-value="0.0"/>
+            <t t-set="total_credit" t-value="0.0"/>
+            <t t-foreach="range(pages)" t-as="cur_page">
+              <t t-set="subtotal_debit" t-value="0.0"/>
+              <t t-set="subtotal_credit" t-value="0.0"/>
+              <table class="table table-bordered border-dark" style="page-break-after: always;">
+                <col class="col" />
+                <col class="col" />
+                <col class="col-2" />
+                <col class="col-2" />
+                <thead class="border-0">
+                  <tr class="border-0">
+                    <td class="border-0" colspan="4">
+                      <table class="table table-borderless mb-0" width="100%">
+                        <col width="30%" />
+                        <col width="30%" />
+                        <col width="30%" />
+                        <tbody class="border-0">
+                          <tr class="text-center">
+                            <td colspan="3">
+                              <h3><span t-field="o.voucher_type_id"/></h3>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="text-start align-bottom">
+                              <span t-field="o.company_id" />
+                            </td>
+                            <td class="text-center align-bottom">
+                              <span t-field="o.date" t-options="{'widget': 'date'}" />
+                            </td>
+                            <td class="text-end align-bottom">
+                              <div>
+                                附件<span t-field="o.attachment" />张<br/>
+                                <span t-field="o.word_id" />字 第<span t-field="o.number" /><t t-if="pages > 1">(<t t-out="cur_page + 1"/>/<t t-out="pages"/>)</t> 号
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
                   </tr>
-                </t>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-                <tr>
-                  <td>摘要</td>
-                  <td>会计科目</td>
-                  <td>借方金额</td>
-                  <td>贷方金额</td>
-                </tr>
-              </tbody>
-            </table>
+                  <tr class="text-center align-middle">
+                    <th><span style="letter-spacing: 2rem">摘</span>要</th>
+                    <th>会计科目</th>
+                    <th>借方金额</th>
+                    <th>贷方金额</th>
+                  </tr>
+                </thead>
+                <tbody class="border-0">
+                  <t t-foreach="range(page_lines)" t-as="i">
+                    <t t-if="cur_line &lt; total_lines">
+                      <t t-set="subtotal_debit" t-value="subtotal_debit + lines[cur_line].debit"/>
+                      <t t-set="subtotal_credit" t-value="subtotal_credit + lines[cur_line].credit"/>
+                      <t t-set="total_debit" t-value="total_debit + lines[cur_line].debit"/>
+                      <t t-set="total_credit" t-value="total_credit + lines[cur_line].credit"/>
+
+                      <tr>
+                        <td><span t-field="lines[cur_line].summary" /></td>
+                        <td><span t-att-res-id="lines[cur_line].id" res-model="account.cn.voucher.line" view-type="form" t-field="lines[cur_line].account_id" /></td>
+                        <td class="text-end"><t t-if="lines[cur_line].debit"><span t-out="'{:,.2f}'.format(lines[cur_line].debit)"/></t></td>
+                        <td class="text-end"><t t-if="lines[cur_line].credit"><span t-out="'{:,.2f}'.format(lines[cur_line].credit)"/></t></td>
+                      </tr>
+                      <t t-set="cur_line" t-value="cur_line + 1"/>
+                    </t>
+                    <t t-else="">
+                      <tr>
+                        <td>&#160;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </t>
+                  </t>
+                  <t t-if="pages > 1">
+                    <!-- <tr> -->
+                      <!--   <td colspan="2">小计：</td> -->
+                      <!--   <td class="text-end"><t t-if="subtotal_debit"><span t-out="'{:,.2f}'.format(subtotal_debit)"/></t></td> -->
+                      <!--   <td class="text-end"><t t-if="subtotal_credit"><span t-out="'{:,.2f}'.format(subtotal_credit)"/></t></td> -->
+                      <!-- </tr> -->
+                  </t>
+                  <tr>
+                    <td class="text-center" colspan="2"><span style="letter-spacing: 2rem">合</span>计</td>
+                    <td class="text-end"><t t-if="total_debit"><span t-out="'{:,.2f}'.format(total_debit)"/></t></td>
+                    <td class="text-end"><t t-if="total_credit"><span t-out="'{:,.2f}'.format(total_credit)"/></t></td>
+                  </tr>
+                </tbody>
+                <tfoot class="border-0">
+                  <tr class="border-0">
+                    <td class="border-0 my-0 p-0" colspan="4">
+                      <table class="table table-borderless mb-0" width="100%">
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <col width="20%" />
+                        <tbody class="border-0">
+                          <tr class="text-start">
+                            <td>财务主管：<span t-field="o.accounting_supervisor_id"/></td>
+                            <td>记账：<span t-field="o.poster_id"/></td>
+                            <td>出纳：<span t-field="o.casher_id"/></td>
+                            <td>审核：<span t-field="o.checker_id"/></td>
+                            <td>制单：<span t-field="o.preparer_id"/></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </t>
           </div>
-        </div>
-      </t>
+        </t>
+      </div>
     </t>
   </template>
 </odoo>

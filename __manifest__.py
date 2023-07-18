@@ -15,6 +15,7 @@
         "views/account_cn_voucher_word_views.xml",
         "views/account_cn_voucher_type_views.xml",
         "views/account_cn_voucher_stage_views.xml",
+        "views/account_cn_voucher_tag_views.xml",
         "views/account_cn_voucher_line_views.xml",
         "views/account_cn_report_filter_views.xml",
         "views/account_cn_report_item_views.xml",

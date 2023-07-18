@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="account_cn_voucher_tag_action" model="ir.actions.act_window">
+    <field name="name">Voucher Tag</field>
+    <field name="res_model">account.cn.voucher.tag</field>
+    <field name="view_mode">tree</field>
+  </record>
+  <record id="account_cn_voucher_tag_view_tree" model="ir.ui.view">
+    <field name="name">Tag Tree</field>
+    <field name="model">account.cn.voucher.tag</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="name"/>
+        <field name="color" widget="color_picker"/>
+      </tree>
+    </field>
+  </record>
+</odoo>

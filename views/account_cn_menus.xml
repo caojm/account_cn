@@ -12,6 +12,7 @@
     </menuitem>
     <menuitem id="account_cn_configuration_menu" name="Configuration">
       <menuitem id="account_cn_configuration_voucher_menu" name="Voucher">
+        <menuitem id="account_cn_voucher_tag_menu" action="account_cn_voucher_tag_action"/>
         <menuitem id="account_cn_voucher_word_menu" action="account_cn_voucher_word_action"/>
         <menuitem id="account_cn_voucher_type_menu" action="account_cn_voucher_type_action"/>
         <menuitem id="account_cn_voucher_stage_menu" action="account_cn_voucher_stage_action"/>

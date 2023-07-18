@@ -11,11 +11,51 @@ class SubsidiaryLedgerWizard(models.TransientModel):
     _description = "Subsidiary Ledger Wizard"
     _inherit = "report.abstract.wizard"
 
-    account_id = fields.Many2one("account.account")
+    account_id = fields.Many2one(
+        "account.account",
+        required=True,
+    )
+    currency_id = fields.Many2one(
+        "res.currency",
+        required=True,
+        default=lambda self: self.env.user.accounting_book_id.currency_id,
+    )
     date_from = fields.Date(
         required=True,
     )
     date_to = fields.Date(required=True, default=fields.Date.context_today)
+    posted_only = fields.Boolean(
+        default=False,
+    )
+    exact_match = fields.Boolean(
+        default=False,
+    )
+    distinguish_partner = fields.Boolean(
+        default=False,
+    )
+    partner_ids = fields.Many2many(
+        "res.partner",
+    )
+    voucher_type_ids = fields.Many2many(
+        "account.cn.voucher.type",
+    )
+    tag_ids = fields.Many2many(
+        "account.cn.voucher.tag",
+    )
+    accounting_book_ids = fields.Many2many(
+        "account.cn.accounting.book",
+        compute="_compute_accounting_book_ids",
+        store=True,
+        readonly=False,
+        required=True,
+        default=lambda self: self.env.user.accounting_book_id,
+        domain="[('currency_id', '=', currency_id)]",
+    )
+    company_ids = fields.Many2many(
+        "res.company",
+        required=True,
+        default=lambda self: self.env.company,
+    )
 
     def _print_report(self, report_type):
         self.ensure_one()
@@ -34,12 +74,29 @@ class SubsidiaryLedgerWizard(models.TransientModel):
         self.ensure_one()
         return {
             "wizard_id": self.id,
-            "company_id": self.company_id.id,
+            "company_ids": self.company_id.ids,
+            "accounting_book_ids": self.accounting_book_ids.ids,
+            "currency_id": self.currency_id.id,
+            "currency_name": self.currency_id.full_name,
             "account_id": self.account_id.id,
+            "account_code": self.account_id.code,
             "account_name": self.account_id.display_name,
             "date_from": self.date_from,
             "date_to": self.date_to,
+            "posted_only": self.posted_only,
+            "exact_match": self.exact_match,
+            "distinguish_partner": self.distinguish_partner,
+            "partner_ids": self.partner_ids.ids,
+            "voucher_type_ids": self.voucher_type_ids.ids,
+            "tag_ids": self.tag_ids.ids,
         }
 
     def _export(self, report_type):
         return self._print_report(report_type)
+
+    @api.depends("currency_id")
+    def _compute_accounting_book_ids(self):
+        self.ensure_one()
+        self.accounting_book_ids = self.accounting_book_ids.filtered(
+            lambda r: r.currency_id == self.currency_id
+        )

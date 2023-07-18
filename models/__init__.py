@@ -2,6 +2,7 @@ from . import account_cn_accounting_book
 from . import account_cn_voucher_word
 from . import account_cn_voucher_type
 from . import account_cn_voucher_stage
+from . import account_cn_voucher_tag
 from . import account_cn_voucher
 from . import account_cn_voucher_line
 from . import account_cn_report_filter

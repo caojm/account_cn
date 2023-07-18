@@ -24,6 +24,10 @@ class AccountCnVoucher(models.Model):
         default=lambda self: self.env.user.accounting_book_id,
         check_company=True,
     )
+    book_currency_id = fields.Many2one(
+        string="Accounting Book Currency",
+        related="accounting_book_id.currency_id",
+    )
     date = fields.Date(
         default=fields.Date.today,
         required=True,
@@ -44,7 +48,7 @@ class AccountCnVoucher(models.Model):
         required=True,
         default=lambda self: self.env.user.voucher_type_id,
     )
-    number = fields.Char(
+    number = fields.Integer(
         compute="_compute_number",
         store=True,
         readonly=False,
@@ -75,9 +79,9 @@ class AccountCnVoucher(models.Model):
     amount_total = fields.Monetary(
         string="Amount",
         compute="_compute_amount",
-        store=True,
-        readonly=True,
-        currency_field="company_currency_id",
+        # store=True,
+        # readonly=True,
+        currency_field="book_currency_id",
     )
     line_ids = fields.One2many(
         "account.cn.voucher.line",
@@ -135,7 +139,7 @@ class AccountCnVoucher(models.Model):
     def _compute_number(self):
         seq = self.word_id.voucher_number_sequence_id._get_current_sequence(self.date)
         if seq:
-            self.number = seq.sequence_id.get_next_char(seq.number_next_actual)
+            self.number = seq.sequence_id.number_next_actual
 
     def do_next_stage(self):
         for voucher in self:

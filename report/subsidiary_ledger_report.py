@@ -69,7 +69,7 @@ class SubsidiaryLedgerReport(models.AbstractModel):
         else:
             domain += [("account_id.code", "=like", account_code + "%")]
         if posted_only:
-            domain += [("voucher_state", "=", posted)]
+            domain += [("voucher_state", "=", "posted")]
         if voucher_type_ids:
             domain += [("voucher_type_id", "in", voucher_type_ids)]
         if tag_ids:
@@ -123,7 +123,7 @@ class SubsidiaryLedgerReport(models.AbstractModel):
         else:
             domain += [("account_id.code", "=like", account_code + "%")]
         if posted_only:
-            domain += [("voucher_state", "=", posted)]
+            domain += [("voucher_state", "=", "posted")]
         if voucher_type_ids:
             domain += [("voucher_type_id", "in", voucher_type_ids)]
         if tag_ids:

@@ -7,6 +7,7 @@
       <menuitem id="account_cn_account_renumber_voucher_menu" action="action_renumber_voucher_wizard"/>
     </menuitem>
     <menuitem id="account_cn_reporting_menu" name="Reporting">
+      <menuitem id="account_cn_report_folder_menu" action="account_cn_report_folder_action"/>
       <menuitem id="account_cn_subsidiary_ledger_menu" action="action_subsidiary_ledger_wizard"/>
       <menuitem id="account_cn_balance_sheet_menu" action="action_balance_sheet_wizard"/>
     </menuitem>
@@ -21,7 +22,9 @@
       <menuitem id="account_cn_configuration_report_menu" name="Report">
         <menuitem id="account_cn_report_model_menu" action="account_cn_report_model_action"/>
         <menuitem id="account_cn_report_item_menu" action="account_cn_report_item_action"/>
+        <menuitem id="account_cn_report_aggregator_menu" action="account_cn_report_aggregator_action"/>
         <menuitem id="account_cn_report_filter_menu" action="account_cn_report_filter_action"/>
+        <menuitem id="account_cn_report_checker_menu" action="account_cn_report_checker_action"/>
         <menuitem id="account_cn_report_measure_menu" action="account_cn_report_measure_action"/>
       </menuitem>
     </menuitem>

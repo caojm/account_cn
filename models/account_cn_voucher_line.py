@@ -71,7 +71,7 @@ class AccountCnVoucherLine(models.Model):
         currency_field="book_currency_id",
     )
     sequence = fields.Integer(
-        default=1,
+        default=10,
     )
     tag_ids = fields.Many2many(
         "account.cn.voucher.tag",

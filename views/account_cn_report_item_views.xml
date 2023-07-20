@@ -13,6 +13,7 @@
         <field name="report_model_id"/>
         <field name="code"/>
         <field name="name"/>
+        <field name="parent_aggregator_id"/>
         <field name="measure_id"/>
         <field name="filter_ids" widget="many2many_tags"/>
         <field name="comment"/>
@@ -31,6 +32,7 @@
               <field name="report_model_id"/>
               <field name="code"/>
               <field name="name"/>
+              <field name="parent_aggregator_id"/>
             </group>
             <group>
               <field name="measure_id"/>
@@ -41,6 +43,9 @@
           <notebook>
             <page string="Filters">
               <field name="filter_ids" />
+            </page>
+            <page string="Aggregators">
+              <field name="child_aggregator_ids" />
             </page>
           </notebook>
         </sheet>

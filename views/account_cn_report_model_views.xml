@@ -29,6 +29,7 @@
               <field name="name" />
             </group>
             <group>
+              <field name="template_id" />
               <field name="company_id" />
             </group>
             <notebook>

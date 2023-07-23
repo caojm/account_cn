@@ -10,7 +10,7 @@ class AccountCnReportChecker(models.Model):
     constant = fields.Float(
         default=0.0,
     )
-    condition = fields.Selection(
+    method = fields.Selection(
         selection=[
             ("gt", "Greater Than"),
             ("gte", "Greater Than  Or Equal To"),
@@ -30,7 +30,7 @@ class AccountCnReportChecker(models.Model):
         "account.cn.report.checker.line",
         "report_checker_right",
     )
-    precondition_line_ids = fields.Many2many(
+    checker_factor_ids = fields.Many2many(
         "account.cn.report.checker.line",
         "report_checker_precondition",
     )

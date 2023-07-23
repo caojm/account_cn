@@ -38,5 +38,4 @@ class AccountCnReportFilter(models.Model):
         default=False,
     )
     item_ids = fields.Many2many("account.cn.report.item")
-    aggregator_ids = fields.Many2many("account.cn.report.aggregator")
     name = fields.Char(string="Comment")

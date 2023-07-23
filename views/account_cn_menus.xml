@@ -25,7 +25,7 @@
         <menuitem id="account_cn_report_aggregator_menu" action="account_cn_report_aggregator_action"/>
         <menuitem id="account_cn_report_filter_menu" action="account_cn_report_filter_action"/>
         <menuitem id="account_cn_report_checker_menu" action="account_cn_report_checker_action"/>
-        <menuitem id="account_cn_report_measure_menu" action="account_cn_report_measure_action"/>
+        <menuitem id="account_cn_report_data_menu" action="account_cn_report_data_action"/>
       </menuitem>
     </menuitem>
   </menuitem>

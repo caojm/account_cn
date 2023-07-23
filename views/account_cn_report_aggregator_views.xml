@@ -39,22 +39,23 @@
                 <field name="child_item_ids">
                   <tree>
                     <field name="report_model_id" />
-                    <field name="code" />
                     <field name="name" />
+                    <field name="position" />
+                    <field name="location" />
                   </tree>
                 </field>
               </page>
-              <page string="Preconditon">
+              <page string="Precondition">
                 <group>
                   <group>
-                    <field name="condition" />
+                    <field name="aggregator_factor_id" />
+                  </group>
+                  <group>
+                    <field name="method" />
                   </group>
                   <group>
                     <field name="constant" />
                   </group>
-                </group>
-                <group>
-                  <field name="filter_ids" />
                 </group>
               </page>
             </notebook>

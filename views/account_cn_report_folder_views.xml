@@ -26,19 +26,31 @@
     <field name="arch" type="xml">
       <form string="Report Folder">
         <header>
+          <button name="compute_and_check" string="Compute &amp; Check" class="oe_highlight" type="object" data-hotkey="c"/>
+          <button name="compute_only" string="Compute" class="btn_secondary" type="object"/>
+          <button name="check_only" string="Check" class="btn_secondary" type="object"/>
         </header>
         <sheet>
           <group>
             <group>
               <field name="name" />
               <field name="currency_id" />
-              <field name="date_from" />
-              <field name="date_to" />
+              <field name="comparison" />
             </group>
             <group>
               <field name="last_update" />
               <field name="posted_only"/>
               <field name="exact_match"/>
+            </group>
+          </group>
+          <group>
+            <group>
+              <field name="date_from" />
+              <field name="date_to" />
+            </group>
+            <group>
+              <field name="com_date_from" attrs="{'invisible': [('comparison', '!=', True)], 'required': [('comparison', '=', True)]}"/>
+              <field name="com_date_to" attrs="{'invisible': [('comparison', '!=', True)], 'required': [('comparison', '=', True)]}"/>
             </group>
           </group>
           <group>
@@ -48,8 +60,11 @@
           <notebook>
             <page string="Reports">
               <field name="folder_model_ids">
-                <tree>
+                <tree editable="bottom">
                   <field name="sequence" widget="handle"/>
+                  <button name="to_be" type="object" string="View" class="btn-success" title="Preview report."/>
+                  <button name="to_be" type="object" string="Excel" class="btn-info" title="Download excel report."/>
+                  <button name="to_be" type="object" icon="fa-paperclip" title="Upload excel template."/>
                   <field name="report_model_id" />
                   <field name="name" />
                 </tree>
@@ -67,10 +82,11 @@
             </page>
             <page string="Checkers">
               <field name="folder_checker_ids">
-                <tree>
+                <tree editable="bottom">
                   <field name="sequence" widget="handle"/>
                   <field name="report_checker_id" />
                   <field name="name" />
+                  <field name="check_result" widget="badge" decoration-success="check_result == 'pass'" decoration-danger="check_result == 'fail'"/>
                 </tree>
                 <form>
                   <group>

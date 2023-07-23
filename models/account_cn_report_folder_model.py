@@ -6,7 +6,7 @@ class AccountCnReportFolderModel(models.Model):
     _name = "account.cn.report.folder.model"
     _description = "Report Folder Model Line"
 
-    name = fields.Char()
+    name = fields.Char(string="Comment")
     sequence = fields.Integer(
         default=10,
     )
@@ -18,3 +18,6 @@ class AccountCnReportFolderModel(models.Model):
         "account.cn.report.model",
         required=True,
     )
+
+    def to_be(self):
+        pass

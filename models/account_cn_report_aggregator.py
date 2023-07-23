@@ -19,13 +19,14 @@ class AccountCnReportAggregator(models.Model):
         required=True,
         default="plus",
     )
-    filter_ids = fields.Many2many(
-        "account.cn.report.filter",
+    aggregator_factor_id = fields.Many2one(
+        "account.cn.report.item",
+        domain="[('aggregator_factor', '=', True)]",
     )
     constant = fields.Float(
         default=0.0,
     )
-    condition = fields.Selection(
+    method = fields.Selection(
         selection=[
             ("gt", "Greater Than"),
             ("gte", "Greater Than  Or Equal To"),

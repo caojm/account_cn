@@ -11,13 +11,15 @@
     <field name="arch" type="xml">
       <tree>
         <field name="report_model_id"/>
-        <field name="code"/>
         <field name="name"/>
+        <field name="position"/>
+        <field name="location"/>
         <field name="parent_aggregator_id"/>
-        <field name="measure_id"/>
+        <field name="measure"/>
         <field name="filter_ids" widget="many2many_tags"/>
         <field name="comment"/>
         <field name="input" optional="hide"/>
+        <field name="aggregator_factor" optional="hide"/>
       </tree>
     </field>
   </record>
@@ -30,14 +32,16 @@
           <group>
             <group>
               <field name="report_model_id"/>
-              <field name="code"/>
               <field name="name"/>
-              <field name="parent_aggregator_id"/>
+              <field name="position"/>
+              <field name="location"/>
             </group>
             <group>
-              <field name="measure_id"/>
-              <field name="comment"/>
+              <field name="measure"/>
+              <field name="parent_aggregator_id"/>
               <field name="input"/>
+              <field name="comment"/>
+              <field name="aggregator_factor"/>
             </group>
           </group>
           <notebook>
@@ -45,7 +49,10 @@
               <field name="filter_ids" />
             </page>
             <page string="Aggregators">
-              <field name="child_aggregator_ids" />
+              <field name="child_aggregator_ids"/>
+            </page>
+            <page string="Factor Of">
+              <field name="factor_of_ids" attrs="{'readonly': True}"/>
             </page>
           </notebook>
         </sheet>

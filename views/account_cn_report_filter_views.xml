@@ -49,8 +49,9 @@
                 <field name="item_ids">
                   <tree>
                     <field name="report_model_id" />
-                    <field name="code" />
                     <field name="name" />
+                    <field name="position" />
+                    <field name="location" />
                   </tree>
                 </field>
               </page>

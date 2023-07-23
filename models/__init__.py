@@ -6,7 +6,6 @@ from . import account_cn_voucher_tag
 from . import account_cn_voucher
 from . import account_cn_voucher_line
 from . import account_cn_report_filter
-from . import account_cn_report_measure
 from . import account_cn_report_item
 from . import account_cn_report_aggregator
 from . import account_cn_report_model
@@ -15,5 +14,6 @@ from . import account_cn_report_checker
 from . import account_cn_report_folder
 from . import account_cn_report_folder_model
 from . import account_cn_report_folder_checker
+from . import account_cn_report_data
 from . import res_company
 from . import res_users

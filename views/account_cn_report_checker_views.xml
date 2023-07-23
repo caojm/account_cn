@@ -50,14 +50,14 @@
               <page string="Preconditon">
                 <group>
                   <group>
-                    <field name="condition" />
+                    <field name="method" />
                   </group>
                   <group>
                     <field name="constant" />
                   </group>
                 </group>
                 <group>
-                  <field name="precondition_line_ids" >
+                  <field name="checker_factor_ids" >
                     <tree>
                       <field name="report_item_id" />
                       <field name="aggregation" />

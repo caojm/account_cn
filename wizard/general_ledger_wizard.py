@@ -68,7 +68,7 @@ class GeneralLedgerWizard(models.TransientModel):
         self.ensure_one()
         return {
             "wizard_id": self.id,
-            "company_ids": self.company_id.ids,
+            "company_ids": self.company_ids.ids,
             "accounting_book_ids": self.accounting_book_ids.ids,
             "currency_id": self.currency_id.id,
             "currency_name": self.currency_id.full_name,

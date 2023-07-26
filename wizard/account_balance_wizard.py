@@ -66,8 +66,6 @@ class AccountBalanceWizard(models.TransientModel):
     def _print_report(self, report_type):
         self.ensure_one()
         data = self._prepare_report_subsidiary_ledger()
-        print("111111111111111111111111111111111111111")
-        print(data)
         report_name = "account_cn.account_balance"
         return (
             self.env["ir.actions.report"]
@@ -82,7 +80,7 @@ class AccountBalanceWizard(models.TransientModel):
         self.ensure_one()
         return {
             "wizard_id": self.id,
-            "company_ids": self.company_id.ids,
+            "company_ids": self.company_ids.ids,
             "accounting_book_ids": self.accounting_book_ids.ids,
             "currency_id": self.currency_id.id,
             "currency_name": self.currency_id.full_name,

@@ -2,6 +2,7 @@ import calendar
 import datetime
 
 from odoo import api, fields, models, _
+from odoo.fields import Date
 from odoo.tools import (
     date_utils,
     float_compare,
@@ -19,108 +20,28 @@ class AccountBalanceReport(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        print("22222222222222222222222222222222222222222222222")
-        print(data)
         if data["account_ids"]:
             accounts = self.env["account.account"].browse(data["account_ids"])
         else:
             accounts = self.env["account.account"].search([])
-        print("22222222222222222222222222222222222222222222222")
-        print(accounts)
         max_account_code_length = data["max_account_code_length"]
-        account_codes = [
-            account.code
+        account_code_name = [
+            (account.code, account.name)
             for account in accounts
             if len(account.code) <= max_account_code_length
         ]
-        initial_balance_data = self._get_initial_balance_data(
-            data["company_ids"],
-            data["accounting_book_ids"],
-            data["account_code"],
-            data["exact_match"],
-            data["date_from"],
-            data["posted_only"],
-            data["distinguish_partner"],
-            data["partner_ids"],
-            data["voucher_type_ids"],
-            data["tag_ids"],
-        )
-        period_amount_data = self._get_period_amount_data(
-            data["company_ids"],
-            data["accounting_book_ids"],
-            data["account_code"],
-            data["exact_match"],
-            data["date_from"],
-            data["date_to"],
-            data["posted_only"],
-            data["distinguish_partner"],
-            data["partner_ids"],
-            data["voucher_type_ids"],
-            data["tag_ids"],
-        )
-        subsidiary_ledger = self._generate_subsidiary_ledger(
+        account_balance = self._generate_account_balance(
             data,
-            initial_balance_data,
-            period_amount_data,
+            account_code_name,
         )
         return {
             "data": data,
-            "subsidiary_ledger": subsidiary_ledger,
+            "account_balance": account_balance,
         }
 
-    def _get_initial_balance_data(
+    def _get_voucher_data(
         self,
-        company_ids,
-        accounting_book_ids,
-        account_code,
-        exact_match,
-        initial_date,
-        posted_only,
-        distinguish_partner,
-        partner_ids,
-        voucher_type_ids,
-        tag_ids,
-    ):
-        domain = [
-            ("company_id", "in", company_ids),
-            ("accounting_book_id", "in", accounting_book_ids),
-            ("date", "<", initial_date),
-        ]
-        fields = []
-        groupby = []
-        if exact_match:
-            domain += [("account_id.code", "=", account_code)]
-        else:
-            domain += [("account_id.code", "=like", account_code + "%")]
-        if posted_only:
-            domain += [("voucher_state", "=", "posted")]
-        if voucher_type_ids:
-            domain += [("voucher_type_id", "in", voucher_type_ids)]
-        if tag_ids:
-            domain += [("tag_ids", "in", tag_ids)]
-
-        if distinguish_partner:
-            domain += [("partner_id", "in", partner_ids)]
-            fields += ["partner_id"]
-            groupby += ["partner_id"]
-        fields += [
-            "company_id",
-            "debit:sum",
-            "credit:sum",
-        ]
-        groupby += [
-            "company_id",
-        ]
-        data = self.env["account.cn.voucher.line"].read_group(
-            domain=domain,
-            fields=fields,
-            groupby=groupby,
-            lazy=False,
-        )
-        return data
-
-    def _get_period_amount_data(
-        self,
+        data_type,
         company_ids,
         accounting_book_ids,
         account_code,
@@ -136,12 +57,13 @@ class AccountBalanceReport(models.AbstractModel):
         domain = [
             ("company_id", "in", company_ids),
             ("accounting_book_id", "in", accounting_book_ids),
-            ("date", ">=", date_from),
-            ("date", "<=", date_to),
         ]
-        fields = []
-        groupby = []
-        orderby = ""
+        if data_type == "balance":
+            domain += [("date", "<", date_from)]
+        elif data_type == "amount":
+            domain += [("date", ">=", date_from), ("date", "<=", date_to)]
+        else:
+            return False
         if exact_match:
             domain += [("account_id.code", "=", account_code)]
         else:
@@ -153,17 +75,20 @@ class AccountBalanceReport(models.AbstractModel):
         if tag_ids:
             domain += [("tag_ids", "in", tag_ids)]
 
+        fields = []
+        groupby = []
+        orderby = False
         if distinguish_partner:
             domain += [("partner_id", "in", partner_ids)]
             fields += ["partner_id"]
-            groupby += ["partner_id"]
-            orderby += "partner_id, "
+            groupby = ["partner_id"]
+            orderby = "partner_id"
+        else:
+            groupby = ["company_id"]
         fields += [
+            # "company_id",
             "debit:sum",
             "credit:sum",
-        ]
-        groupby += [
-            "company_id",
         ]
         data = self.env["account.cn.voucher.line"].read_group(
             domain=domain,
@@ -174,173 +99,287 @@ class AccountBalanceReport(models.AbstractModel):
         )
         return data
 
-    def _generate_subsidiary_ledger(
+    def _generate_account_balance(self, data, accounts):
+        account_balance = []
+        total = {
+            "account_code": False,
+            "account_name": _("Total"),
+            "partner_name": False,
+            "opening_balance_debit": 0.0,
+            "opening_balance_credit": 0.0,
+            "this_amount_debit": 0.0,
+            "this_amount_credit": 0.0,
+            "year_amount_debit": 0.0,
+            "year_amount_credit": 0.0,
+            "closing_balance_debit": 0.0,
+            "closing_balance_credit": 0.0,
+        }
+        for account in accounts:
+            initial_balance_data = self._get_voucher_data(
+                "balance",
+                data["company_ids"],
+                data["accounting_book_ids"],
+                account[0],
+                data["exact_match"],
+                data["date_from"],
+                data["date_to"],
+                data["posted_only"],
+                data["distinguish_partner"],
+                data["partner_ids"],
+                data["voucher_type_ids"],
+                data["tag_ids"],
+            )
+            this_amount_data = self._get_voucher_data(
+                "amount",
+                data["company_ids"],
+                data["accounting_book_ids"],
+                account[0],
+                data["exact_match"],
+                data["date_from"],
+                data["date_to"],
+                data["posted_only"],
+                data["distinguish_partner"],
+                data["partner_ids"],
+                data["voucher_type_ids"],
+                data["tag_ids"],
+            )
+            year_amount_data = self._get_voucher_data(
+                "amount",
+                data["company_ids"],
+                data["accounting_book_ids"],
+                account[0],
+                data["exact_match"],
+                self._this_year_start(Date.to_date(data["date_to"])),
+                data["date_to"],
+                data["posted_only"],
+                data["distinguish_partner"],
+                data["partner_ids"],
+                data["voucher_type_ids"],
+                data["tag_ids"],
+            )
+            if initial_balance_data or this_amount_data:
+                account_balance += self._make_account_balance(
+                    data,
+                    account,
+                    initial_balance_data,
+                    this_amount_data,
+                    year_amount_data,
+                )
+                total["opening_balance_debit"] += account_balance[-1][
+                    "opening_balance_debit"
+                ]
+                total["opening_balance_credit"] += account_balance[-1][
+                    "opening_balance_credit"
+                ]
+                total["this_amount_debit"] += account_balance[-1]["this_amount_debit"]
+                total["this_amount_credit"] += account_balance[-1]["this_amount_credit"]
+                total["year_amount_debit"] += account_balance[-1]["year_amount_debit"]
+                total["year_amount_credit"] += account_balance[-1]["year_amount_credit"]
+                total["closing_balance_debit"] += account_balance[-1][
+                    "closing_balance_debit"
+                ]
+                total["closing_balance_credit"] += account_balance[-1][
+                    "closing_balance_credit"
+                ]
+            else:
+                continue
+        account_balance += [total]
+        return account_balance
+
+    def _make_account_balance(
         self,
         data,
+        account_code_name,
         initial_balance_data,
-        period_amount_data,
+        this_amount_data,
+        year_amount_data,
     ):
         if data["distinguish_partner"]:
-            subsidiary_ledger = []
+            account_balance = []
+            partner_total = {
+                "account_code": False,
+                "account_name": False,
+                "partner_name": _("Partner total"),
+                "opening_balance_debit": 0.0,
+                "opening_balance_credit": 0.0,
+                "this_amount_debit": 0.0,
+                "this_amount_credit": 0.0,
+                "year_amount_debit": 0.0,
+                "year_amount_credit": 0.0,
+                "closing_balance_debit": 0.0,
+                "closing_balance_credit": 0.0,
+            }
             for partner_id in data["partner_ids"]:
-                initial_balance_data_filtered = list(
-                    filter(
-                        lambda r: r["partner_id"][0] == partner_id,
-                        initial_balance_data,
-                    )
-                )
-                period_amount_data_filtered = list(
-                    filter(
-                        lambda r: r["partner_id"][0] == partner_id,
-                        period_amount_data,
-                    )
-                )
-                partner_name = self.env["res.partner"].browse([partner_id]).name
-                addition = {
-                    "partner_id": partner_id,
-                    "partner_name": partner_name,
-                }
-                subsidiary_ledger += self._make_subsidiary_ledger(
-                    data,
-                    initial_balance_data_filtered,
-                    period_amount_data_filtered,
-                    addition,
-                )
-            return subsidiary_ledger
-        else:
-            return self._make_subsidiary_ledger(
-                data, initial_balance_data, period_amount_data
-            )
-
-    def _make_subsidiary_ledger(
-        self,
-        data,
-        initial_balance_data,
-        period_amount_data,
-        addition=False,
-    ):
-        subsidiary_ledger = []
-        initial_balance = {
-            "date": data["date_from"],
-            "voucher_id": None,
-            "voucher_word_number": None,
-            "summary": _("Initial balance"),
-            "debit": 0.0,
-            "credit": 0.0,
-            "orient": False,
-            "balance": 0.0,
-        }
-        if addition:
-            initial_balance.update(addition)
-
-        if initial_balance_data:
-            for ib in initial_balance_data:
-                initial_balance["debit"] += ib["debit"]
-                initial_balance["credit"] += ib["credit"]
-
-            initial_balance["balance"] = (
-                initial_balance["debit"] - initial_balance["credit"]
-            )
-        subsidiary_ledger += [initial_balance]
-
-        if period_amount_data:
-            date_years = set()
-            date_months = set()
-            date_years.add(period_amount_data[0]["date:year"])
-            date_months.add(period_amount_data[0]["date:month"])
-            total_month = {
-                "date": None,
-                "voucher_id": None,
-                "voucher_word_number": None,
-                "summary": _("The month total"),
-                "debit": 0.0,
-                "credit": 0.0,
-                "orient": False,
-                "balance": initial_balance["balance"],
-            }
-            total_year = {
-                "date": None,
-                "voucher_id": None,
-                "voucher_word_number": None,
-                "summary": _("The year total"),
-                "debit": 0.0,
-                "credit": 0.0,
-                "orient": False,
-                "balance": 0.0,
-            }
-            if addition:
-                total_month.update(addition)
-                total_year.update(addition)
-            for pa in period_amount_data:
                 item = {
-                    "date": pa["date:day"],
-                    "voucher_id": pa["voucher_id"][0],
-                    "voucher_word_number": pa["voucher_word"][1]
-                    + "-"
-                    + str(pa["voucher_number"]),
-                    "summary": pa["summary"],
-                    "debit": pa["debit"],
-                    "credit": pa["credit"],
-                    "orient": False,
-                    "balance": 0.0,
+                    "account_code": account_code_name[0],
+                    "account_name": account_code_name[1],
+                    "partner_name": False,
+                    "opening_balance_debit": 0.0,
+                    "opening_balance_credit": 0.0,
+                    "this_amount_debit": 0.0,
+                    "this_amount_credit": 0.0,
+                    "year_amount_debit": 0.0,
+                    "year_amount_credit": 0.0,
+                    "closing_balance_debit": 0.0,
+                    "closing_balance_credit": 0.0,
                 }
-                if addition:
-                    item.update(addition)
-                if pa["date:month"] in date_months:
-                    total_month["debit"] += item["debit"]
-                    total_month["credit"] += item["credit"]
-                    total_month["balance"] = (
-                        total_month["balance"] + item["debit"] - item["credit"]
+                item["partner_name"] = self.env["res.partner"].browse([partner_id]).name
+                item["opening_balance_debit"] = sum(
+                    map(
+                        lambda x: x["debit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            initial_balance_data,
+                        ),
                     )
-                    item["balance"] = total_month["balance"]
-                    subsidiary_ledger += [item]
-                elif pa["date:year"] in date_years:
-                    date_months.add(pa["date:month"])
-                    total_month["date"] = self._last_month_end(pa["date:day"])
-                    subsidiary_ledger += [dict(total_month)]
-                    total_year["date"] = total_month["date"]
-                    total_year["debit"] += total_month["debit"]
-                    total_year["credit"] += total_month["credit"]
-                    total_year["balance"] = total_month["balance"]
-                    subsidiary_ledger += [dict(total_year)]
-                    total_month["debit"] = item["debit"]
-                    total_month["credit"] = item["credit"]
-                    total_month["balance"] = (
-                        total_month["balance"] + item["debit"] - item["credit"]
+                )
+                item["opening_balance_credit"] = sum(
+                    map(
+                        lambda x: x["credit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            initial_balance_data,
+                        ),
                     )
-                    item["balance"] = total_month["balance"]
-                    subsidiary_ledger += [item]
+                )
+                opening_balance_net = (
+                    item["opening_balance_debit"] - item["opening_balance_credit"]
+                )
+                if opening_balance_net > 0:
+                    item["opening_balance_debit"] = opening_balance_net
+                    item["opening_balance_credit"] = 0.0
+                elif opening_balance_net < 0:
+                    item["opening_balance_debit"] = 0.0
+                    item["opening_balance_credit"] = -opening_balance_net
                 else:
-                    date_months.add(pa["date:month"])
-                    date_years.add(pa["date:year"])
-                    total_month["date"] = self._last_year_end(pa["date:day"])
-                    subsidiary_ledger += [dict(total_month)]
-                    total_year["date"] = total_month["date"]
-                    total_year["debit"] += total_month["debit"]
-                    total_year["credit"] += total_month["credit"]
-                    total_year["balance"] = total_month["balance"]
-                    subsidiary_ledger += [dict(total_year)]
-                    total_month["debit"] = item["debit"]
-                    total_month["credit"] = item["credit"]
-                    total_month["balance"] = (
-                        total_month["balance"] + item["debit"] - item["credit"]
+                    item["opening_balance_debit"] = 0.0
+                    item["opening_balance_credit"] = 0.0
+
+                item["this_amount_debit"] = sum(
+                    map(
+                        lambda x: x["debit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            this_amount_data,
+                        ),
                     )
-                    item["balance"] = total_month["balance"]
-                    subsidiary_ledger += [item]
-                    total_year["debit"] = 0.0
-                    total_year["credit"] = 0.0
+                )
+                item["this_amount_credit"] = sum(
+                    map(
+                        lambda x: x["credit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            this_amount_data,
+                        ),
+                    )
+                )
+                item["year_amount_debit"] = sum(
+                    map(
+                        lambda x: x["debit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            year_amount_data,
+                        ),
+                    )
+                )
+                item["year_amount_credit"] = sum(
+                    map(
+                        lambda x: x["credit"],
+                        filter(
+                            lambda y: y["partner_id"][0] == partner_id,
+                            year_amount_data,
+                        ),
+                    )
+                )
 
-            total_month["date"] = self._this_month_end(
-                period_amount_data[-1]["date:day"]
+                closing_balance_net = (
+                    opening_balance_net
+                    + item["this_amount_debit"]
+                    - item["this_amount_credit"]
+                )
+                if closing_balance_net > 0:
+                    item["closing_balance_debit"] = closing_balance_net
+                    item["closing_balance_credit"] = 0.0
+                elif closing_balance_net < 0:
+                    item["closing_balance_debit"] = 0.0
+                    item["closing_balance_credit"] = -closing_balance_net
+                else:
+                    item["closing_balance_debit"] = 0.0
+                    item["closing_balance_credit"] = 0.0
+
+                partner_total["opening_balance_debit"] += item["opening_balance_debit"]
+                partner_total["opening_balance_credit"] += item[
+                    "opening_balance_credit"
+                ]
+                partner_total["this_amount_debit"] += item["this_amount_debit"]
+                partner_total["this_amount_credit"] += item["this_amount_credit"]
+                partner_total["year_amount_debit"] += item["year_amount_debit"]
+                partner_total["year_amount_credit"] += item["year_amount_credit"]
+                partner_total["closing_balance_debit"] += item["closing_balance_debit"]
+                partner_total["closing_balance_credit"] += item[
+                    "closing_balance_credit"
+                ]
+
+                account_balance.append(item)
+            account_balance.append(partner_total)
+            return account_balance
+        else:
+            item = {
+                "account_code": account_code_name[0],
+                "account_name": account_code_name[1],
+                "opening_balance_debit": 0.0,
+                "opening_balance_credit": 0.0,
+                "this_amount_debit": 0.0,
+                "this_amount_credit": 0.0,
+                "year_amount_debit": 0.0,
+                "year_amount_credit": 0.0,
+                "closing_balance_debit": 0.0,
+                "closing_balance_credit": 0.0,
+            }
+            item["opening_balance_debit"] = sum(
+                map(lambda x: x["debit"], initial_balance_data)
             )
-            subsidiary_ledger += [total_month]
-            total_year["date"] = total_month["date"]
-            total_year["debit"] += total_month["debit"]
-            total_year["credit"] += total_month["credit"]
-            total_year["balance"] = total_month["balance"]
-            subsidiary_ledger += [total_year]
+            item["opening_balance_credit"] = sum(
+                map(lambda x: x["credit"], initial_balance_data)
+            )
+            opening_balance_net = (
+                item["opening_balance_debit"] - item["opening_balance_credit"]
+            )
+            if opening_balance_net > 0:
+                item["opening_balance_debit"] = opening_balance_net
+                item["opening_balance_credit"] = 0.0
+            elif opening_balance_net < 0:
+                item["opening_balance_debit"] = 0.0
+                item["opening_balance_credit"] = -opening_balance_net
+            else:
+                item["opening_balance_debit"] = 0.0
+                item["opening_balance_credit"] = 0.0
 
-        return subsidiary_ledger
+            item["this_amount_debit"] = sum(map(lambda x: x["debit"], this_amount_data))
+            item["this_amount_credit"] = sum(
+                map(lambda x: x["credit"], this_amount_data)
+            )
+            item["year_amount_debit"] = sum(map(lambda x: x["debit"], year_amount_data))
+            item["year_amount_credit"] = sum(
+                map(lambda x: x["credit"], year_amount_data)
+            )
+
+            closing_balance_net = (
+                opening_balance_net
+                + item["this_amount_debit"]
+                - item["this_amount_credit"]
+            )
+            if closing_balance_net > 0:
+                item["closing_balance_debit"] = closing_balance_net
+                item["closing_balance_credit"] = 0.0
+            elif closing_balance_net < 0:
+                item["closing_balance_debit"] = 0.0
+                item["closing_balance_credit"] = -closing_balance_net
+            else:
+                item["closing_balance_debit"] = 0.0
+                item["closing_balance_credit"] = 0.0
+
+            return [item]
 
     def _last_month_end(self, date):
         return date_utils.end_of(date_utils.subtract(date, months=1), "month")
@@ -350,6 +389,9 @@ class AccountBalanceReport(models.AbstractModel):
 
     def _this_month_end(self, date):
         return date_utils.end_of(date, "month")
+
+    def _this_year_start(self, date):
+        return date_utils.start_of(date, "year")
 
     def _convert_date_day_to_object(self, data):
         lang = self.env.lang

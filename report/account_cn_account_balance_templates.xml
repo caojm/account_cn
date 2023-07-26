@@ -7,26 +7,31 @@
 
           <t t-if="not data['distinguish_partner']">
             <table class="table table-bordered border-dark caption-top">
-              <col width="10%" />
-              <col width="10%" />
-              <col width="30%" />
-              <col width="15%" />
-              <col width="15%" />
               <col width="5%" />
               <col width="15%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
+              <col width="10%" />
               <thead class="border-0">
                 <tr class="border-0">
-                  <td colspan="7" class="border-0">
+                  <td colspan="10" class="border-0">
                     <table width="100%" class="table-borderless">
                       <col width="30%" />
                       <col width="30%" />
                       <col width="30%" />
                       <tbody class="border-0">
                         <tr class="text-center">
-                          <td colspan="3"><h3>明细分类账</h3></td>
+                          <td colspan="3"><h3>科目余额表</h3></td>
                         </tr>
                         <tr>
-                          <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
+                          <td class="text-start align-bottom"><div>单位：<span t-out="data['currency_name']" /></div></td>
                           <td class="text-center align-bottom"><div>币别：<span t-out="data['currency_name']" /></div></td>
                           <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
                         </tr>
@@ -35,96 +40,110 @@
                   </td>
                 </tr>
                 <tr class="text-center align-middle">
-                  <th>日期</th>
-                  <th>字号</th>
-                  <th>摘要</th>
-                  <th>借方金额</th>
-                  <th>贷方金额</th>
-                  <th>方向</th>
-                  <th>余额</th>
+                  <th rowspan="2">科目代码</th>
+                  <th rowspan="2">科目名称</th>
+                  <th colspan="2">期初余额</th>
+                  <th colspan="2">本期发生额</th>
+                  <th colspan="2">本年累计</th>
+                  <th colspan="2">期末余额</th>
+                </tr>
+                <tr class="text-center align-middle">
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
                 </tr>
               </thead>
               <tbody class="border-0">
                 <t t-foreach="account_balance" t-as="ab">
                   <tr>
-                    <td class="text-nowrap text-center"><span t-out="ab['date']" t-options="{'widget': 'date'}"></span></td>
-                    <td class="text-nowrap text-center"><span t-att-res-id="ab['voucher_id']" res-model="account.cn.voucher" view-type="form" target="new"> <t t-out="ab['voucher_word_number']" /></span></td>
-                    <td><span> <t t-out="ab['summary']" /></span></td>
+                    <td><span> <t t-out="ab['account_code']" /></span></td>
+                    <td><span> <t t-out="ab['account_name']" /></span></td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['debit'] == 0.0" />
-                        <t t-else="" t-out="'{:,.2f}'.format(ab['debit'])" />
+                        <t t-if="ab['opening_balance_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['opening_balance_debit'])" />
                       </span>
                     </td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['credit'] == 0.0" />
-                        <t t-else="" t-out="'{:,.2f}'.format(ab['credit'])" />
-                      </span>
-                    </td>
-                    <td class="text-center">
-                      <span>
-                        <t t-if="ab['balance'] > 0.0">借</t>
-                        <t t-elif="ab['balance'] &lt; 0.0">贷</t>
-                        <t t-else="">平</t>
+                        <t t-if="ab['opening_balance_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['opening_balance_credit'])" />
                       </span>
                     </td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['balance'] > 0.0" t-out="'{:,.2f}'.format(ab['balance'])" />
-                        <t t-elif="ab['balance'] &lt; 0.0" t-out="'{:,.2f}'.format(-ab['balance'])" />
-                        <t t-else="" />
+                        <t t-if="ab['this_amount_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['this_amount_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['this_amount_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['this_amount_credit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['year_amount_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['year_amount_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['year_amount_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['year_amount_credit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['closing_balance_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['closing_balance_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['closing_balance_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['closing_balance_credit'])" />
                       </span>
                     </td>
                   </tr>
                 </t>
               </tbody>
               <tfoot class="border-0">
-                <tr class="border-0">
-                  <td colspan="7" class="border-0">
-                    <table width="100%" class="table-borderless">
-                      <col width="30%" />
-                      <col width="30%" />
-                      <col width="30%" />
-                      <tbody class="border-0">
-                        <tr>
-                          <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
-                          <td class="text-center align-bottom"><div>币别：<span t-out="data['currency_name']" /></div></td>
-                          <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
-                        </tr>
-                        <tr class="text-center">
-                          <td colspan="3"><h3>明细分类账</h3></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
               </tfoot>
             </table>
           </t>
           <t t-else="">
             <table class="table table-bordered border-dark caption-top">
-              <col width="20%" />
-              <col width="10%" />
-              <col width="10%" />
-              <col width="20%" />
-              <col width="15%" />
-              <col width="15%" />
               <col width="5%" />
               <col width="15%" />
+              <col width="16%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
+              <col width="8%" />
               <thead class="border-0">
                 <tr class="border-0">
-                  <td colspan="8" class="border-0">
+                  <td colspan="11" class="border-0">
                     <table width="100%" class="table-borderless">
                       <col width="30%" />
                       <col width="30%" />
                       <col width="30%" />
                       <tbody class="border-0">
                         <tr class="text-center">
-                          <td colspan="3"><h3>明细分类账</h3></td>
+                          <td colspan="3"><h3>科目余额表</h3></td>
                         </tr>
                         <tr>
-                          <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
+                          <td class="text-start align-bottom"><div>单位：<span t-out="data['currency_name']" /></div></td>
                           <td class="text-center align-bottom"><div>币别：<span t-out="data['currency_name']" /></div></td>
                           <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
                         </tr>
@@ -133,72 +152,83 @@
                   </td>
                 </tr>
                 <tr class="text-center align-middle">
-                  <th>业务伙伴</th>
-                  <th>日期</th>
-                  <th>字号</th>
-                  <th>摘要</th>
-                  <th>借方金额</th>
-                  <th>贷方金额</th>
-                  <th>方向</th>
-                  <th>余额</th>
+                  <th rowspan="2">科目代码</th>
+                  <th rowspan="2">科目名称</th>
+                  <th rowspan="2">业务伙伴</th>
+                  <th colspan="2">期初余额</th>
+                  <th colspan="2">本期发生额</th>
+                  <th colspan="2">本年累计</th>
+                  <th colspan="2">期末余额</th>
+                </tr>
+                <tr class="text-center align-middle">
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
+                  <th>借方</th>
+                  <th>贷方</th>
                 </tr>
               </thead>
               <tbody class="border-0">
                 <t t-foreach="account_balance" t-as="ab">
                   <tr>
+                    <td><span> <t t-out="ab['account_code']" /></span></td>
+                    <td><span> <t t-out="ab['account_name']" /></span></td>
                     <td><span> <t t-out="ab['partner_name']" /></span></td>
-                    <td class="text-nowrap text-center"><span t-out="ab['date']" t-options="{'widget': 'date'}"></span></td>
-                    <td class="text-nowrap text-center"><span t-att-res-id="ab['voucher_id']" res-model="account.cn.voucher" view-type="form" target="new"> <t t-out="ab['voucher_word_number']" /></span></td>
-                    <td><span> <t t-out="ab['summary']" /></span></td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['debit'] == 0.0" />
-                        <t t-else="" t-out="'{:,.2f}'.format(ab['debit'])" />
+                        <t t-if="ab['opening_balance_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['opening_balance_debit'])" />
                       </span>
                     </td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['credit'] == 0.0" />
-                        <t t-else="" t-out="'{:,.2f}'.format(ab['credit'])" />
-                      </span>
-                    </td>
-                    <td class="text-center">
-                      <span>
-                        <t t-if="ab['balance'] > 0.0">借</t>
-                        <t t-elif="ab['balance'] &lt; 0.0">贷</t>
-                        <t t-else="">平</t>
+                        <t t-if="ab['opening_balance_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['opening_balance_credit'])" />
                       </span>
                     </td>
                     <td class="text-end">
                       <span>
-                        <t t-if="ab['balance'] > 0.0" t-out="'{:,.2f}'.format(ab['balance'])" />
-                        <t t-elif="ab['balance'] &lt; 0.0" t-out="'{:,.2f}'.format(-ab['balance'])" />
-                        <t t-else="" />
+                        <t t-if="ab['this_amount_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['this_amount_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['this_amount_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['this_amount_credit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['year_amount_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['year_amount_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['year_amount_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['year_amount_credit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['closing_balance_debit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['closing_balance_debit'])" />
+                      </span>
+                    </td>
+                    <td class="text-end">
+                      <span>
+                        <t t-if="ab['closing_balance_credit'] == 0.0" />
+                        <t t-else="" t-out="'{:,.2f}'.format(ab['closing_balance_credit'])" />
                       </span>
                     </td>
                   </tr>
                 </t>
               </tbody>
               <tfoot class="border-0">
-                <tr class="border-0">
-                  <td colspan="8" class="border-0">
-                    <table width="100%" class="table-borderless">
-                      <col width="30%" />
-                      <col width="30%" />
-                      <col width="30%" />
-                      <tbody class="border-0">
-                        <tr>
-                          <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
-                          <td class="text-center align-bottom"><div>币别：<span t-out="data['currency_name']" /></div></td>
-                          <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
-                        </tr>
-                        <tr class="text-center">
-                          <td colspan="3"><h3>明细分类账</h3></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
               </tfoot>
             </table>
           </t>

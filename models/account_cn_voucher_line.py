@@ -7,7 +7,10 @@ class AccountCnVoucherLine(models.Model):
     _inherit = "analytic.mixin"
     _description = "Account Voucher Entry"
 
-    voucher_id = fields.Many2one("account.cn.voucher")
+    voucher_id = fields.Many2one(
+        "account.cn.voucher",
+        ondelete="cascade",
+    )
     company_id = fields.Many2one(
         related="voucher_id.company_id",
         store=True,
@@ -44,6 +47,13 @@ class AccountCnVoucherLine(models.Model):
         "account.account",
         required=True,
         check_company=True,
+    )
+    account_code = fields.Char(
+        related="account_id.code",
+        store=True,
+    )
+    account_code_length = fields.Integer(
+        compute="_compute_account_code_length",
     )
     partner_id = fields.Many2one(
         "res.partner",
@@ -113,3 +123,8 @@ class AccountCnVoucherLine(models.Model):
                 old_lines = line.voucher_id.line_ids - line
                 if old_lines:
                     line.partner_id = old_lines[-1].partner_id
+
+    @api.depends("account_id.code")
+    def _compute_account_code_length(self):
+        for line in self:
+            line.account_code_length = len(line.account_id.code)

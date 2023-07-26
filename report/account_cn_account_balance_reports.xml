@@ -1,0 +1,9 @@
+<odoo>
+  <record id="action_account_cn_account_balance_report" model="ir.actions.report">
+    <field name="name">Account Balance</field>
+    <field name="model">account.balance.wizard</field>
+    <field name="report_type">qweb-html</field>
+    <field name="report_name">account_cn.account_balance</field>
+  </record>
+</odoo>
+

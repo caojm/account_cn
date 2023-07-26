@@ -14,11 +14,25 @@ from odoo.tools import (
 )
 
 
-class SubsidiaryLedgerReport(models.AbstractModel):
-    _name = "report.account_cn.subsidiary_ledger"
+class AccountBalanceReport(models.AbstractModel):
+    _name = "report.account_cn.account_balance"
 
     @api.model
     def _get_report_values(self, docids, data=None):
+        print("22222222222222222222222222222222222222222222222")
+        print(data)
+        if data["account_ids"]:
+            accounts = self.env["account.account"].browse(data["account_ids"])
+        else:
+            accounts = self.env["account.account"].search([])
+        print("22222222222222222222222222222222222222222222222")
+        print(accounts)
+        max_account_code_length = data["max_account_code_length"]
+        account_codes = [
+            account.code
+            for account in accounts
+            if len(account.code) <= max_account_code_length
+        ]
         initial_balance_data = self._get_initial_balance_data(
             data["company_ids"],
             data["accounting_book_ids"],
@@ -145,28 +159,12 @@ class SubsidiaryLedgerReport(models.AbstractModel):
             groupby += ["partner_id"]
             orderby += "partner_id, "
         fields += [
-            "date",
-            "date",
-            "date",
-            "voucher_id",
-            "voucher_word",
-            "voucher_number",
-            "summary",
             "debit:sum",
             "credit:sum",
         ]
         groupby += [
-            "date:year",
-            "date:month",
-            "date:day",
-            "voucher_id",
-            "voucher_word",
-            "voucher_number",
-            "summary",
+            "company_id",
         ]
-        orderby += (
-            "date:year ASC, date:month ASC, date:day ASC, voucher_word, voucher_number"
-        )
         data = self.env["account.cn.voucher.line"].read_group(
             domain=domain,
             fields=fields,
@@ -174,7 +172,7 @@ class SubsidiaryLedgerReport(models.AbstractModel):
             orderby=orderby,
             lazy=False,
         )
-        return list(map(self._convert_date_day_to_object, data))
+        return data
 
     def _generate_subsidiary_ledger(
         self,

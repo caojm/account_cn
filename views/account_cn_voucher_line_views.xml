@@ -3,15 +3,20 @@
   <record id="account_cn_voucher_line_action" model="ir.actions.act_window">
     <field name="name">Voucher Entries</field>
     <field name="res_model">account.cn.voucher.line</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">tree,form,pivot</field>
   </record>
   <record id="account_cn_voucher_line_view_tree" model="ir.ui.view">
     <field name="name">Entry Tree</field>
     <field name="model">account.cn.voucher.line</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree create="false">
+        <field name="voucher_id" optional="hide"/>
+        <field name="date"/>
+        <field name="voucher_word"/>
+        <field name="voucher_number"/>
         <field name="summary"/>
         <field name="account_id"/>
+        <field name="account_code_length" optional="hide"/>
         <field name="partner_id"/>
         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" optional="hide"/>
         <field name="currency_id" optional="hide"/>
@@ -31,6 +36,7 @@
       <form string="Voucher Item">
         <sheet>
           <group>
+            <field name="voucher_id"/>
             <field name="summary"/>
             <field name="account_id"/>
             <field name="partner_id"/>
@@ -45,6 +51,20 @@
           </group>
         </sheet>
       </form>
+    </field>
+  </record>
+  <record id="account_cn_voucher_line_view_pivot" model="ir.ui.view">
+    <field name="name">Entry Pivot</field>
+    <field name="model">account.cn.voucher.line</field>
+    <field name="arch" type="xml">
+      <pivot sample="1">
+        <field name="account_id" type="row"/>
+        <field name="date" type="col" interval="year"/>
+        <field name="debit" type="measure"/>
+        <field name="credit" type="measure"/>
+        <field name="voucher_number" invisible="1"/>
+        <field name="sequence" invisible="1"/>
+      </pivot>
     </field>
   </record>
 </odoo>

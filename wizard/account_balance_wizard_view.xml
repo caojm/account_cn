@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="account_balance_wizard" model="ir.ui.view">
+    <field name="name">Account Balance</field>
+    <field name="model">account.balance.wizard</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+            <field name="account_ids" widget="many2many_tags"/>
+        </group>
+        <group>
+          <group>
+            <field name="max_account_code_length" />
+            <field name="currency_id" />
+          </group>
+          <group>
+            <field name="posted_only" />
+            <field name="exact_match" />
+          </group>
+        </group>
+        <group>
+          <group>
+            <field name="date_from" />
+          </group>
+          <group>
+            <field name="date_to" />
+          </group>
+        </group>
+        <group>
+          <field name="distinguish_partner" />
+          <field name="partner_ids" widget="many2many_tags" attrs="{'invisible': [('distinguish_partner', '!=', True)], 'required': [('distinguish_partner', '=', True)]}"/>
+          <field name="accounting_book_ids" widget="many2many_tags"/>
+          <field name="company_ids" widget="many2many_tags"/>
+          <field name="voucher_type_ids" widget="many2many_tags"/>
+          <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+        </group>
+        <footer>
+          <button
+            name="button_export_html"
+            string="View"
+            type="object"
+            default_focus="1"
+            class="oe_highlight"
+            />
+
+          <button
+            string="Cancel"
+            class="oe_link"
+            special="cancel"
+            />
+        </footer>
+      </form>
+    </field>
+  </record>
+  <record id="action_account_balance_wizard" model="ir.actions.act_window">
+    <field name="name">Account Balance</field>
+    <field name="res_model">account.balance.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="account_balance_wizard" />
+    <field name="target">new</field>
+  </record>
+</odoo>

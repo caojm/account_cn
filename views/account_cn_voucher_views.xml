@@ -46,10 +46,12 @@
           <button name="do_next_stage" string="Check" class="oe_highlight" type="object" data-hotkey="k" attrs="{'invisible': [('next_state', '!=', 'checked')]}"/>
           <button name="do_next_stage" string="Sign" class="oe_highlight" type="object" data-hotkey="i" attrs="{'invisible': [('next_state', '!=', 'signed')]}"/>
           <button name="do_next_stage" string="Post" class="oe_highlight" type="object" data-hotkey="t" attrs="{'invisible': [('next_state', '!=', 'posted')]}"/>
+          <button name="do_next_stage" string="Lock" class="oe_highlight" type="object" data-hotkey="t" attrs="{'invisible': [('next_state', '!=', 'locked')]}"/>
           <button name="undo_next_stage" string="Un-Confirm" class="btn_secondary" type="object" data-hotkey="shift+m" states="prepared"/>
           <button name="undo_next_stage" string="Un-Check" class="btn_secondary" type="object" data-hotkey="shift+k" states="checked"/>
           <button name="undo_next_stage" string="Un-Sign" class="btn_secondary" type="object" data-hotkey="shift+i" states="signed"/>
           <button name="undo_next_stage" string="Un-Post" class="btn_secondary" type="object" data-hotkey="shift+t" states="posted"/>
+          <button name="undo_next_stage" string="Un-Lock" class="btn_secondary" type="object" data-hotkey="shift+l" states="locked"/>
           <button name="reject_stage" string="Reject" class="btn_secondary" type="object" attrs="{'invisible': [('is_first_stage', '=', True)]}"/>
           <!-- <field name="state" widget="statusbar" statusbar_visible="draft, posted"/> -->
           <field name="stage_id" widget="statusbar"/>

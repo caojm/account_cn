@@ -258,15 +258,19 @@ class AccountCnVoucher(models.Model):
                     limit=2,
                 )
                 voucher.next_state = stages[1].state if len(stages) == 2 else False
+            else:
+                voucher.next_state = None
 
     @api.depends("voucher_type_id.voucher_stage_ids.sequence")
     def _compute_first_stage(self):
         for voucher in self:
-            if voucher.voucher_type_id.voucher_stage_ids:
+            if voucher.voucher_type_id and voucher.voucher_type_id.voucher_stage_ids:
                 voucher.first_stage = voucher._stage_find(voucher.voucher_type_id.id)
                 voucher.is_first_stage = (
                     True if voucher.stage_id == voucher.first_stage else False
                 )
+            else:
+                voucher.is_first_stage = None
 
     @api.model
     def create(self, vals):

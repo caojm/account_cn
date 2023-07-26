@@ -1,25 +1,30 @@
 <odoo noupdate="1">
   <record id="stage_draft" model="account.cn.voucher.stage">
+    <field name="code">Draft</field>
     <field name="name">Draft</field>
     <field name="state">draft</field>
     <field name="sequence">10</field>
   </record>
   <record id="stage_prepared" model="account.cn.voucher.stage">
+    <field name="code">Prepared</field>
     <field name="name">Prepared</field>
     <field name="state">prepared</field>
     <field name="sequence">20</field>
   </record>
   <record id="stage_checked" model="account.cn.voucher.stage">
+    <field name="code">Checked</field>
     <field name="name">Checked</field>
     <field name="state">checked</field>
     <field name="sequence">30</field>
   </record>
   <record id="stage_signed" model="account.cn.voucher.stage">
+    <field name="code">Signed</field>
     <field name="name">Signed</field>
     <field name="state">signed</field>
     <field name="sequence">40</field>
   </record>
   <record id="stage_posted" model="account.cn.voucher.stage">
+    <field name="code">Posted</field>
     <field name="name">Posted</field>
     <field name="state">posted</field>
     <field name="sequence">50</field>

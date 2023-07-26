@@ -47,7 +47,7 @@
               <tbody class="border-0">
                 <t t-foreach="subsidiary_ledger" t-as="sl">
                   <tr>
-                    <td class="text-nowrap text-center"><span t-out="time.strftime('%Y-%m-%d', time.strptime(sl['date'], '%d %b %Y'))"></span></td>
+                    <td class="text-nowrap text-center"><span t-out="sl['date']" t-options="{'widget': 'date'}"></span></td>
                     <td class="text-nowrap text-center"><span t-att-res-id="sl['voucher_id']" res-model="account.cn.voucher" view-type="form" target="new"> <t t-out="sl['voucher_word_number']" /></span></td>
                     <td><span> <t t-out="sl['summary']" /></span></td>
                     <td class="text-end">
@@ -147,7 +147,7 @@
                 <t t-foreach="subsidiary_ledger" t-as="sl">
                   <tr>
                     <td><span> <t t-out="sl['partner_name']" /></span></td>
-                    <td class="text-nowrap text-center"><span t-out="time.strftime('%Y-%m-%d', time.strptime(sl['date'], '%d %b %Y'))"></span></td>
+                    <td class="text-nowrap text-center"><span t-out="sl['date']" t-options="{'widget': 'date'}"></span></td>
                     <td class="text-nowrap text-center"><span t-att-res-id="sl['voucher_id']" res-model="account.cn.voucher" view-type="form" target="new"> <t t-out="sl['voucher_word_number']" /></span></td>
                     <td><span> <t t-out="sl['summary']" /></span></td>
                     <td class="text-end">

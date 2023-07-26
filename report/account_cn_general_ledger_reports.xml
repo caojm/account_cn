@@ -1,0 +1,9 @@
+<odoo>
+  <record id="action_account_cn_general_ledger_report" model="ir.actions.report">
+    <field name="name">General Ledger</field>
+    <field name="model">general.ledger.wizard</field>
+    <field name="report_type">qweb-html</field>
+    <field name="report_name">account_cn.general_ledger</field>
+  </record>
+</odoo>
+

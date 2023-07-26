@@ -28,6 +28,7 @@ class AccountCnVoucherStage(models.Model):
             ("checked", "Checked"),
             ("signed", "Signed"),
             ("posted", "Posted"),
+            ("locked", "Locked"),
         ],
         string="Status",
         copy=True,

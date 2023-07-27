@@ -77,23 +77,6 @@
             </tbody>
             <tfoot class="border-0">
               <tr class="border-0">
-                <td colspan="7" class="border-0">
-                  <table width="100%" class="table-borderless">
-                    <col width="30%" />
-                    <col width="30%" />
-                    <col width="30%" />
-                    <tbody class="border-0">
-                      <tr>
-                        <td class="text-start align-bottom"><div>科目：<span t-out="data['account_name']" /></div></td>
-                        <td class="text-center align-bottom"><div>币别：<span t-out="data['currency_name']" /></div></td>
-                        <td class="text-end align-bottom"><div>期间/日期：<span t-out="data['date_from']" t-options="{'widget': 'date'}" />-<span t-out="data['date_to']" t-options="{'widget': 'date'}" /></div></td>
-                      </tr>
-                      <tr class="text-center">
-                        <td colspan="3"><h3>明细分类账</h3></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
               </tr>
             </tfoot>
           </table>

@@ -1,0 +1,1011 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cn
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-27 02:56+0000\n"
+"PO-Revision-Date: 2023-07-27 02:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "<span style=\"letter-spacing: 2rem\">合</span>计"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "<span style=\"letter-spacing: 2rem\">摘</span>要"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__account_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__account_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__account_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__account_id
+msgid "Account"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.action_account_balance_wizard
+#: model:ir.actions.report,name:account_cn.action_account_cn_account_balance_report
+#: model:ir.ui.menu,name:account_cn.account_cn_account_balance_menu
+msgid "Account Balance"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_balance_wizard
+msgid "Account Balance Wizard"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__account_code_length
+msgid "Account Code Length"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_line
+msgid "Account Voucher Entry"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_tag
+msgid "Account Voucher Tag"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_type
+msgid "Account Voucher Type"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_word
+msgid "Account Voucher Word"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_configuration_accounting_menu
+msgid "Accounting"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_accounting_book_action
+#: model:ir.model,name:account_cn.model_account_cn_accounting_book
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__accounting_book_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__accounting_book_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__accounting_book_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__accounting_book_ids
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__accounting_book_id
+#: model:ir.model.fields,field_description:account_cn.field_res_users__accounting_book_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__accounting_book_ids
+#: model:ir.ui.menu,name:account_cn.account_cn_accounting_book_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_accounting_book_view_form
+msgid "Accounting Book"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__book_currency_id
+msgid "Accounting Book Currency"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.view_users_form_simple_modif_accounting
+msgid "Accounting Settings"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__accounting_supervisor_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__accounting_supervisor_id
+msgid "Accounting Supervisor"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_action
+#: model:ir.actions.report,name:account_cn.action_account_cn_voucher_report
+#: model:ir.model,name:account_cn.model_account_cn_voucher
+#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Accounting Voucher"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__active
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__active
+msgid "Active"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__amount_total
+msgid "Amount"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__amount_currency
+msgid "Amount Currency"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__analytic_distribution
+msgid "Analytic"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__analytic_precision
+msgid "Analytic Precision"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.view_users_form_simple_modif_accounting
+msgid "Approvers"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance_wizard
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger_wizard
+#: model_terms:ir.ui.view,arch_db:account_cn.renumber_voucher_wizard
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__casher_id
+msgid "Casher"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Check"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__checked
+msgid "Checked"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__checker_id
+msgid "Checker"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_menu_root
+msgid "Chinese Accounting"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__code
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__account_code
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__code
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__code
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__code
+msgid "Code"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__color
+msgid "Color"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__company_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__company_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__company_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__company_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__company_ids
+#: model:ir.model.fields,field_description:account_cn.field_report_abstract_wizard__company_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__company_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__company_ids
+msgid "Company"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__company_currency_id
+msgid "Company Currency"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_configuration_menu
+msgid "Configuration"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Confirm"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__continuation
+msgid "Continuation"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__create_uid
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__create_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__create_date
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__create_date
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__create_date
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__credit
+msgid "Credit"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__currency_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__currency_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__book_currency_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__currency_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__currency_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__date
+msgid "Date"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__date_from
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__date_from
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__date_from
+msgid "Date From"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__date_range_ids
+msgid "Date Range"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__date_to
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__date_to
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__date_to
+msgid "Date To"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/wizard/renumber_voucher_wizard.py:0
+#, python-format
+msgid "Date range is empty."
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__debit
+msgid "Debit"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_res_company__default_book_id
+msgid "Default Book"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__display_name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__display_name
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__display_name
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__display_name
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__distinguish_partner
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__distinguish_partner
+msgid "Distinguish Partner"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__line_ids
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Entries"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__exact_match
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__exact_match
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__exact_match
+msgid "Exact Match"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__first_stage
+msgid "First Stage"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__fold
+msgid "Fold"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.action_general_ledger_wizard
+#: model:ir.actions.report,name:account_cn.action_account_cn_general_ledger_report
+#: model:ir.ui.menu,name:account_cn.account_cn_general_ledger_menu
+msgid "General Ledger"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_general_ledger_wizard
+msgid "General Ledger Wizard"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__id
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/subsidiary_ledger_report.py:0
+#, python-format
+msgid "Initial balance"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__is_first_stage
+msgid "Is First Stage"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type____last_update
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word____last_update
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard____last_update
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard____last_update
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__write_uid
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__write_date
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__write_date
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__write_date
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__write_date
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Lock"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__locked
+msgid "Locked"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__max_account_code_length
+msgid "Max Account Code Length"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_tag__name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__name
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__name
+msgid "Name"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__next_state
+msgid "Next State"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/wizard/renumber_voucher_wizard.py:0
+#, python-format
+msgid "No vouchers found."
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__number
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_number
+msgid "Number"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__partner_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__partner_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__partner_ids
+msgid "Partner"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/account_balance_report.py:0
+#, python-format
+msgid "Partner total"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Post"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__posted
+msgid "Posted"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__posted_only
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__posted_only
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__posted_only
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__posted_only
+msgid "Posted Only"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__poster_id
+msgid "Poster"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__prepared
+msgid "Prepared"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__preparer_id
+msgid "Preparer"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Reject"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.renumber_voucher_wizard
+msgid "Renumber"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.action_renumber_voucher_wizard
+#: model:ir.model,name:account_cn.model_renumber_voucher_wizard
+#: model:ir.ui.menu,name:account_cn.account_cn_account_renumber_voucher_menu
+msgid "Renumber Voucher"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_report_abstract_wizard
+msgid "Report Abstract Wizard"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_reporting_menu
+msgid "Reporting"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,help:account_cn.field_renumber_voucher_wizard__starting_number
+msgid "Reset sequence to this number before starting."
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__sequence
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Sign"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Signature"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__signed
+msgid "Signed"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__stage_id
+msgid "Stage"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__starting_number
+msgid "Starting Number"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__state
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_state
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__state
+msgid "Status"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.action_subsidiary_ledger_wizard
+#: model:ir.actions.report,name:account_cn.action_account_cn_subsidiary_ledger_report
+#: model:ir.ui.menu,name:account_cn.account_cn_subsidiary_ledger_menu
+msgid "Subsidiary Ledger"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_subsidiary_ledger_wizard
+msgid "Subsidiary Ledger Wizard"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__summary
+msgid "Summary"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__tag_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__tag_ids
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__tag_ids
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__tag_ids
+msgid "Tag"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/general_ledger_report.py:0
+#: code:addons/account_cn/report/subsidiary_ledger_report.py:0
+#, python-format
+msgid "The month total"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/models/account_cn_voucher.py:0
+#, python-format
+msgid "The voucher %s is not balanced."
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/general_ledger_report.py:0
+#, python-format
+msgid "The year initial balance"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/general_ledger_report.py:0
+#: code:addons/account_cn/report/subsidiary_ledger_report.py:0
+#, python-format
+msgid "The year total"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.renumber_voucher_wizard
+msgid "This operation is irreversible. Continue?"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/report/account_balance_report.py:0
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_tree
+#, python-format
+msgid "Total"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_line_view_form
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_line_view_tree
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Total Credit"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_line_view_form
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_line_view_tree
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Total Debit"
+msgstr ""
+
+#. module: account_cn
+#. odoo-python
+#: code:addons/account_cn/models/account_cn_voucher.py:0
+#, python-format
+msgid "Two or more entries of voucher %s is needed."
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Un-Check"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Un-Confirm"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Un-Lock"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Un-Post"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
+msgid "Un-Sign"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_res_users
+msgid "User"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance_wizard
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger_wizard
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger_wizard
+msgid "View"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_id
+#: model:ir.ui.menu,name:account_cn.account_cn_configuration_voucher_menu
+#: model:ir.ui.menu,name:account_cn.account_cn_voucher_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.view_users_form_simple_modif_accounting
+msgid "Voucher"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_line_action
+#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_line_menu
+msgid "Voucher Entries"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_line_view_form
+msgid "Voucher Item"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_word__voucher_number_sequence_id
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__sequence_id
+msgid "Voucher Number Sequence"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_stage_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_stage
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_type__voucher_stage_ids
+#: model:ir.ui.menu,name:account_cn.account_cn_voucher_stage_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_stage_view_form
+msgid "Voucher Stage"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_tag_action
+#: model:ir.ui.menu,name:account_cn.account_cn_voucher_tag_menu
+msgid "Voucher Tag"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_type_action
+#: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__voucher_type_ids
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__voucher_type_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__voucher_type_id
+#: model:ir.model.fields,field_description:account_cn.field_general_ledger_wizard__voucher_type_ids
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__voucher_type_id
+#: model:ir.model.fields,field_description:account_cn.field_res_users__voucher_type_id
+#: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__voucher_type_ids
+#: model:ir.ui.menu,name:account_cn.account_cn_voucher_type_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_type_view_form
+msgid "Voucher Type"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_word_action
+#: model:ir.model.fields,field_description:account_cn.field_res_users__voucher_word_id
+#: model:ir.ui.menu,name:account_cn.account_cn_voucher_word_menu
+#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_word_view_form
+msgid "Voucher Word"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__word_id
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_word
+#: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__word_id
+msgid "Word"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_report_account_cn_account_balance
+msgid "report.account_cn.account_balance"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_report_account_cn_general_ledger
+msgid "report.account_cn.general_ledger"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_report_account_cn_subsidiary_ledger
+msgid "report.account_cn.subsidiary_ledger"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "业务伙伴"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "会计科目"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "余额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "借方"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "借方金额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "出纳："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "制单："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "单位："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "字 第"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "字号"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "审核："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "币别："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "张<br/>"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+msgid "总分类账"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "摘要"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "方向"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "日期"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "明细分类账"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "期初余额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "期末余额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "期间/日期："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "本年累计"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "本期发生额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "科目代码"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "科目余额表"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "科目名称"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "科目："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "记账："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "财务主管："
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.account_balance
+msgid "贷方"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
+#: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
+msgid "贷方金额"
+msgstr ""
+
+#. module: account_cn
+#: model_terms:ir.ui.view,arch_db:account_cn.accounting_voucher
+msgid "附件"
+msgstr ""

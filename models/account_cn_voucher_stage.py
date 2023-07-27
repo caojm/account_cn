@@ -14,7 +14,7 @@ class AccountCnVoucherStage(models.Model):
     code = fields.Char(
         required=True,
     )
-    name = fields.Char()
+    name = fields.Char(translate=True)
     sequence = fields.Integer(
         required=True,
         default=10,

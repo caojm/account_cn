@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
   <record id="account_cn_voucher_action" model="ir.actions.act_window">
-    <field name="name">Accounting Voucher</field>
+    <field name="name">Manage Voucher</field>
     <field name="res_model">account.cn.voucher</field>
     <field name="view_mode">tree,form</field>
   </record>

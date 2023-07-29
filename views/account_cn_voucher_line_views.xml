@@ -24,6 +24,8 @@
         <field name="book_currency_id" invisible="1"/>
         <field name="debit" sum="Total Debit"/>
         <field name="credit" sum="Total Credit"/>
+        <field name="include_cash_flow" optional="hide"/>
+        <field name="account_tag_ids" widget="many2many_tags"/>
         <field name="accounting_book_id" optional="hide"/>
         <field name="company_id" optional="hide"/>
       </tree>

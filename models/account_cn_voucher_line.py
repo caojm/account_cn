@@ -37,6 +37,10 @@ class AccountCnVoucherLine(models.Model):
     voucher_state = fields.Selection(
         related="voucher_id.state",
     )
+    include_cash_flow = fields.Boolean(
+        related="voucher_id.include_cash_flow",
+        store=True,
+    )
 
     summary = fields.Char(
         compute="_compute_summary",
@@ -54,6 +58,14 @@ class AccountCnVoucherLine(models.Model):
     )
     account_code_length = fields.Integer(
         compute="_compute_account_code_length",
+    )
+    account_tag_ids = fields.Many2many(
+        relation="account_cn_voucher_line_and_account_account_tag_rel",
+        column1="voucher_line",
+        column2="account_tag",
+        string="Account tag",
+        related="account_id.tag_ids",
+        store=True,
     )
     partner_id = fields.Many2one(
         "res.partner",

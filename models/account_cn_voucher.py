@@ -89,6 +89,9 @@ class AccountCnVoucher(models.Model):
         string="Entries",
         copy=True,
     )
+    include_cash_flow = fields.Boolean(
+        compute="_compute_include_cash_flow",
+    )
     accounting_supervisor_id = fields.Many2one(
         related="accounting_book_id.accounting_supervisor_id",
     )
@@ -139,7 +142,7 @@ class AccountCnVoucher(models.Model):
     def _compute_number(self):
         seq = self.word_id.voucher_number_sequence_id._get_current_sequence(self.date)
         if seq:
-            self.number = seq.sequence_id.number_next_actual
+            self.number = seq.number_next_actual
 
     def do_next_stage(self):
         for voucher in self:
@@ -271,6 +274,25 @@ class AccountCnVoucher(models.Model):
                 )
             else:
                 voucher.is_first_stage = None
+
+    @api.depends("line_ids")
+    def _compute_include_cash_flow(self):
+        for voucher in self:
+            cash = False
+            not_cash = False
+            for line in voucher.line_ids:
+                if cash and not_cash:
+                    break
+                elif line.account_id.account_type == "asset_cash":
+                    cash = True
+                elif line.account_id.account_type not in ("asset_cash", "off_balance"):
+                    not_cash = True
+                else:
+                    continue
+            if cash and not_cash:
+                voucher.include_cash_flow = True
+            else:
+                voucher.include_cash_flow = False
 
     @api.model
     def create(self, vals):

@@ -17,6 +17,8 @@ from odoo.tools import (
 
 class AccountBalanceReport(models.AbstractModel):
     _name = "report.account_cn.account_balance"
+    _inherit = "account_cn.report.abstract"
+    _description = "Account Balance"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -380,35 +382,3 @@ class AccountBalanceReport(models.AbstractModel):
                 item["closing_balance_credit"] = 0.0
 
             return [item]
-
-    def _last_month_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, months=1), "month")
-
-    def _last_year_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, years=1), "year")
-
-    def _this_month_end(self, date):
-        return date_utils.end_of(date, "month")
-
-    def _this_year_start(self, date):
-        return date_utils.start_of(date, "year")
-
-    def _convert_date_day_to_object(self, data):
-        lang = self.env.lang
-        if lang == "en_US":
-            data["date:day"] = self._convert_date_day_to_object_en_US(data["date:day"])
-            return data
-        elif lang == "zh_CN":
-            data["date:day"] = self._convert_date_day_to_object_zh_CN(data["date:day"])
-            return data
-        else:
-            return data
-
-    def _convert_date_day_to_object_en_US(self, date_day):
-        return fields.Date.to_date(datetime.datetime.strptime(date_day, "%d %b %Y"))
-
-    def _convert_date_day_to_object_zh_CN(self, date_day):
-        year = date_day[-4:]
-        month = date_day[3:-6]
-        day = date_day[0:2]
-        return datetime.date(int(year), int(month), int(day))

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-27 02:56+0000\n"
-"PO-Revision-Date: 2023-07-27 02:56+0000\n"
+"POT-Creation-Date: 2023-08-01 10:13+0000\n"
+"PO-Revision-Date: 2023-08-01 10:13+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,7 @@ msgstr ""
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_account_balance_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_account_balance_report
+#: model:ir.model,name:account_cn.model_report_account_cn_account_balance
 #: model:ir.ui.menu,name:account_cn.account_cn_account_balance_menu
 msgid "Account Balance"
 msgstr ""
@@ -51,23 +52,14 @@ msgid "Account Code Length"
 msgstr ""
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_line
-msgid "Account Voucher Entry"
+#: model:ir.actions.act_window,name:account_cn.account_cn_account_tag_action
+#: model:ir.ui.menu,name:account_cn.account_cn_account_tag_menu
+msgid "Account Tags"
 msgstr ""
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_tag
-msgid "Account Voucher Tag"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_type
-msgid "Account Voucher Type"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_word
-msgid "Account Voucher Word"
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__account_tag_ids
+msgid "Account tag"
 msgstr ""
 
 #. module: account_cn
@@ -104,15 +96,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__accounting_supervisor_id
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__accounting_supervisor_id
 msgid "Accounting Supervisor"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_action
-#: model:ir.actions.report,name:account_cn.action_account_cn_voucher_report
-#: model:ir.model,name:account_cn.model_account_cn_voucher
-#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_menu
-#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
-msgid "Accounting Voucher"
 msgstr ""
 
 #. module: account_cn
@@ -170,11 +153,17 @@ msgid "Casher"
 msgstr ""
 
 #. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_account_menu
+msgid "Chart of Accounts"
+msgstr ""
+
+#. module: account_cn
 #: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
 msgid "Check"
 msgstr ""
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_checked
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__checked
 msgid "Checked"
 msgstr ""
@@ -355,6 +344,7 @@ msgid "Distinguish Partner"
 msgstr ""
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_draft
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__draft
 msgid "Draft"
 msgstr ""
@@ -385,6 +375,7 @@ msgstr ""
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_general_ledger_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_general_ledger_report
+#: model:ir.model,name:account_cn.model_report_account_cn_general_ledger
 #: model:ir.ui.menu,name:account_cn.account_cn_general_ledger_menu
 msgid "General Ledger"
 msgstr ""
@@ -407,6 +398,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__id
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__id
 msgid "ID"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__include_cash_flow
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__include_cash_flow
+msgid "Include Cash Flow"
 msgstr ""
 
 #. module: account_cn
@@ -477,6 +474,12 @@ msgid "Locked"
 msgstr ""
 
 #. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_action
+#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_menu
+msgid "Manage Voucher"
+msgstr ""
+
+#. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__max_account_code_length
 msgid "Max Account Code Length"
 msgstr ""
@@ -509,6 +512,11 @@ msgid "Number"
 msgstr ""
 
 #. module: account_cn
+#: model:ir.model.fields,help:account_cn.field_account_cn_voucher_line__account_tag_ids
+msgid "Optional tags you may want to assign for custom reporting"
+msgstr ""
+
+#. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__partner_ids
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__partner_id
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__partner_ids
@@ -528,6 +536,7 @@ msgid "Post"
 msgstr ""
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_posted
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__posted
 msgid "Posted"
 msgstr ""
@@ -546,6 +555,7 @@ msgid "Poster"
 msgstr ""
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_prepared
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__prepared
 msgid "Prepared"
 msgstr ""
@@ -604,8 +614,15 @@ msgid "Signature"
 msgstr ""
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_signed
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__signed
 msgid "Signed"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_spreadsheet_action
+#: model:ir.ui.menu,name:account_cn.account_cn_spreadsheet_menu
+msgid "Spreadsheets"
 msgstr ""
 
 #. module: account_cn
@@ -628,6 +645,7 @@ msgstr ""
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_subsidiary_ledger_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_subsidiary_ledger_report
+#: model:ir.model,name:account_cn.model_report_account_cn_subsidiary_ledger
 #: model:ir.ui.menu,name:account_cn.account_cn_subsidiary_ledger_menu
 msgid "Subsidiary Ledger"
 msgstr ""
@@ -752,6 +770,8 @@ msgid "View"
 msgstr ""
 
 #. module: account_cn
+#: model:ir.actions.report,name:account_cn.action_account_cn_voucher_report
+#: model:ir.model,name:account_cn.model_account_cn_voucher
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_id
 #: model:ir.ui.menu,name:account_cn.account_cn_configuration_voucher_menu
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_menu
@@ -763,6 +783,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_line_action
 #: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_line_menu
 msgid "Voucher Entries"
+msgstr ""
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_line
+msgid "Voucher Entry"
 msgstr ""
 
 #. module: account_cn
@@ -787,12 +812,14 @@ msgstr ""
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_tag_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_tag
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_tag_menu
 msgid "Voucher Tag"
 msgstr ""
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_type_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_type
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__voucher_type_ids
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__voucher_type_id
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__voucher_type_id
@@ -807,6 +834,7 @@ msgstr ""
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_word_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_word
 #: model:ir.model.fields,field_description:account_cn.field_res_users__voucher_word_id
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_word_menu
 #: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_word_view_form
@@ -821,18 +849,8 @@ msgid "Word"
 msgstr ""
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_account_balance
-msgid "report.account_cn.account_balance"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_general_ledger
-msgid "report.account_cn.general_ledger"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_subsidiary_ledger
-msgid "report.account_cn.subsidiary_ledger"
+#: model:ir.model,name:account_cn.model_account_cn_report_abstract
+msgid "Report Abstract"
 msgstr ""
 
 #. module: account_cn
@@ -930,7 +948,6 @@ msgid "日期"
 msgstr ""
 
 #. module: account_cn
-#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
 #: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
 msgid "明细分类账"
 msgstr ""

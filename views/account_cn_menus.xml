@@ -2,8 +2,8 @@
 <odoo>
   <record id="account_cn_spreadsheet_action" model="ir.actions.act_window">
     <field name="name">Spreadsheets</field>
-    <field name="res_model">spreadsheet.spreadsheet</field>
-    <field name="view_mode">tree,form</field>
+    <field name="res_model">documents.document</field>
+    <field name="view_mode">kanban,tree</field>
   </record>
   <record id="account_cn_account_tag_action" model="ir.actions.act_window">
     <field name="name">Account Tags</field>
@@ -12,28 +12,29 @@
   </record>
   <menuitem id="account_cn_menu_root" name="Chinese Accounting">
     <menuitem id="account_cn_voucher_menu" name="Voucher">
-      <menuitem id="account_cn_account_voucher_menu" action="account_cn_voucher_action"/>
-      <menuitem id="account_cn_account_voucher_line_menu" action="account_cn_voucher_line_action"/>
-      <menuitem id="account_cn_account_renumber_voucher_menu" action="action_renumber_voucher_wizard"/>
+      <menuitem id="account_cn_account_voucher_menu" action="account_cn_voucher_action" />
+      <menuitem id="account_cn_account_voucher_line_menu" action="account_cn_voucher_line_action" />
+      <menuitem id="account_cn_account_renumber_voucher_menu"
+        action="action_renumber_voucher_wizard" />
     </menuitem>
     <menuitem id="account_cn_reporting_menu" name="Reporting">
-      <menuitem id="account_cn_spreadsheet_menu" action="account_cn_spreadsheet_action"/>
-      <menuitem id="account_cn_account_balance_menu" action="action_account_balance_wizard"/>
-      <menuitem id="account_cn_subsidiary_ledger_menu" action="action_subsidiary_ledger_wizard"/>
-      <menuitem id="account_cn_general_ledger_menu" action="action_general_ledger_wizard"/>
+      <menuitem id="account_cn_spreadsheet_menu" action="account_cn_spreadsheet_action" />
+      <menuitem id="account_cn_account_balance_menu" action="action_account_balance_wizard" />
+      <menuitem id="account_cn_subsidiary_ledger_menu" action="action_subsidiary_ledger_wizard" />
+      <menuitem id="account_cn_general_ledger_menu" action="action_general_ledger_wizard" />
     </menuitem>
     <menuitem id="account_cn_configuration_menu" name="Configuration">
       <menuitem id="account_cn_configuration_voucher_menu" name="Voucher">
-        <menuitem id="account_cn_voucher_tag_menu" action="account_cn_voucher_tag_action"/>
-        <menuitem id="account_cn_voucher_word_menu" action="account_cn_voucher_word_action"/>
-        <menuitem id="account_cn_voucher_type_menu" action="account_cn_voucher_type_action"/>
-        <menuitem id="account_cn_voucher_stage_menu" action="account_cn_voucher_stage_action"/>
-        <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action"/>
+        <menuitem id="account_cn_voucher_tag_menu" action="account_cn_voucher_tag_action" />
+        <menuitem id="account_cn_voucher_word_menu" action="account_cn_voucher_word_action" />
+        <menuitem id="account_cn_voucher_type_menu" action="account_cn_voucher_type_action" />
+        <menuitem id="account_cn_voucher_stage_menu" action="account_cn_voucher_stage_action" />
+        <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action" />
       </menuitem>
       <menuitem id="account_cn_configuration_accounting_menu" name="Accounting">
-        <menuitem id="account_cn_account_menu" action="account.action_account_form"/>
-        <menuitem id="account_cn_account_tag_menu" action="account_cn_account_tag_action"/>
-        <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action"/>
+        <menuitem id="account_cn_account_menu" action="account.action_account_form" />
+        <menuitem id="account_cn_account_tag_menu" action="account_cn_account_tag_action" />
+        <menuitem id="account_cn_accounting_book_menu" action="account_cn_accounting_book_action" />
       </menuitem>
     </menuitem>
   </menuitem>

@@ -15,7 +15,7 @@ class AccountBalanceWizard(models.TransientModel):
         "account.account",
     )
     max_account_code_length = fields.Integer(
-        default=6,
+        default=4,
         required=True,
     )
     currency_id = fields.Many2one(

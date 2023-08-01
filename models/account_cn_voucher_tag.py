@@ -3,7 +3,7 @@ from odoo import fields, models
 
 class AccountCnVoucherTag(models.Model):
     _name = "account.cn.voucher.tag"
-    _description = "Account Voucher Tag"
+    _description = "Voucher Tag"
 
     company_id = fields.Many2one(
         "res.company",

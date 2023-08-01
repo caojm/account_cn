@@ -5,7 +5,7 @@ from odoo import api, fields, models
 class AccountCnVoucherLine(models.Model):
     _name = "account.cn.voucher.line"
     _inherit = "analytic.mixin"
-    _description = "Account Voucher Entry"
+    _description = "Voucher Entry"
 
     voucher_id = fields.Many2one(
         "account.cn.voucher",

@@ -17,6 +17,8 @@ from odoo.tools import (
 
 class GeneralLedgerReport(models.AbstractModel):
     _name = "report.account_cn.general_ledger"
+    _inherit = "account_cn.report.abstract"
+    _description = "General Ledger"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -217,52 +219,3 @@ class GeneralLedgerReport(models.AbstractModel):
                     general_ledger += [dict(total_year)]
 
         return general_ledger
-
-    def _last_month_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, months=1), "month")
-
-    def _last_year_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, years=1), "year")
-
-    def _this_month_end(self, date):
-        return date_utils.end_of(date, "month")
-
-    def _this_year_start(self, date):
-        return date_utils.start_of(date, "year")
-
-    def _convert_date_month_to_object(self, data):
-        lang = self.env.lang
-        if lang == "en_US":
-            data["date:month"] = self._convert_date_month_to_object_en_US(
-                data["date:month"]
-            )
-            return data
-        elif lang == "zh_CN":
-            data["date:month"] = self._convert_date_month_to_object_zh_CN(
-                data["date:month"]
-            )
-            return data
-        else:
-            return data
-
-    def _convert_date_month_to_object_en_US(self, date_month):
-        return Date.to_date(datetime.datetime.strptime("01 " + date_month, "%d %B %Y"))
-
-    def _convert_date_month_to_object_zh_CN(self, date_month):
-        MONTH = {
-            "一月": 1,
-            "二月": 2,
-            "三月": 3,
-            "四月": 4,
-            "五月": 5,
-            "六月": 6,
-            "七月": 7,
-            "八月": 8,
-            "九月": 9,
-            "十月": 10,
-            "十一月": 11,
-            "十二月": 12,
-        }
-        year = date_month[-4:]
-        month = MONTH[date_month[0:-5]]
-        return datetime.date(int(year), month, 1)

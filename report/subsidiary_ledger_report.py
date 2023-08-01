@@ -16,6 +16,8 @@ from odoo.tools import (
 
 class SubsidiaryLedgerReport(models.AbstractModel):
     _name = "report.account_cn.subsidiary_ledger"
+    _inherit = "account_cn.report.abstract"
+    _description = "Subsidiary Ledger"
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -243,6 +245,8 @@ class SubsidiaryLedgerReport(models.AbstractModel):
             initial_balance["balance"] = (
                 initial_balance["debit"] - initial_balance["credit"]
             )
+            initial_balance["debit"] = 0.0
+            initial_balance["credit"] = 0.0
         subsidiary_ledger += [initial_balance]
 
         if period_amount_data:
@@ -289,6 +293,7 @@ class SubsidiaryLedgerReport(models.AbstractModel):
                 if addition:
                     item.update(addition)
                 if pa["date:month"] in date_months:
+                    total_month["date"] = self._this_month_end(pa["date:day"])
                     total_month["debit"] += item["debit"]
                     total_month["credit"] += item["credit"]
                     total_month["balance"] = (
@@ -298,13 +303,13 @@ class SubsidiaryLedgerReport(models.AbstractModel):
                     subsidiary_ledger += [item]
                 elif pa["date:year"] in date_years:
                     date_months.add(pa["date:month"])
-                    total_month["date"] = self._last_month_end(pa["date:day"])
                     subsidiary_ledger += [dict(total_month)]
                     total_year["date"] = total_month["date"]
                     total_year["debit"] += total_month["debit"]
                     total_year["credit"] += total_month["credit"]
                     total_year["balance"] = total_month["balance"]
                     subsidiary_ledger += [dict(total_year)]
+                    total_month["date"] = self._this_month_end(pa["date:day"])
                     total_month["debit"] = item["debit"]
                     total_month["credit"] = item["credit"]
                     total_month["balance"] = (
@@ -315,13 +320,13 @@ class SubsidiaryLedgerReport(models.AbstractModel):
                 else:
                     date_months.add(pa["date:month"])
                     date_years.add(pa["date:year"])
-                    total_month["date"] = self._last_year_end(pa["date:day"])
                     subsidiary_ledger += [dict(total_month)]
                     total_year["date"] = total_month["date"]
                     total_year["debit"] += total_month["debit"]
                     total_year["credit"] += total_month["credit"]
                     total_year["balance"] = total_month["balance"]
                     subsidiary_ledger += [dict(total_year)]
+                    total_month["date"] = self._this_month_end(pa["date:day"])
                     total_month["debit"] = item["debit"]
                     total_month["credit"] = item["credit"]
                     total_month["balance"] = (
@@ -343,32 +348,3 @@ class SubsidiaryLedgerReport(models.AbstractModel):
             subsidiary_ledger += [total_year]
 
         return subsidiary_ledger
-
-    def _last_month_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, months=1), "month")
-
-    def _last_year_end(self, date):
-        return date_utils.end_of(date_utils.subtract(date, years=1), "year")
-
-    def _this_month_end(self, date):
-        return date_utils.end_of(date, "month")
-
-    def _convert_date_day_to_object(self, data):
-        lang = self.env.lang
-        if lang == "en_US":
-            data["date:day"] = self._convert_date_day_to_object_en_US(data["date:day"])
-            return data
-        elif lang == "zh_CN":
-            data["date:day"] = self._convert_date_day_to_object_zh_CN(data["date:day"])
-            return data
-        else:
-            return data
-
-    def _convert_date_day_to_object_en_US(self, date_day):
-        return fields.Date.to_date(datetime.datetime.strptime(date_day, "%d %b %Y"))
-
-    def _convert_date_day_to_object_zh_CN(self, date_day):
-        year = date_day[-4:]
-        month = date_day[3:-6]
-        day = date_day[0:2]
-        return datetime.date(int(year), int(month), int(day))

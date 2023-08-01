@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 
 class AccountCnVoucher(models.Model):
     _name = "account.cn.voucher"
-    _description = "Accounting Voucher"
+    _description = "Voucher"
     _check_company_auto = True
 
     active = fields.Boolean(default=True)
@@ -59,6 +59,7 @@ class AccountCnVoucher(models.Model):
         compute="_compute_stage_id",
         store=True,
         readonly=False,
+        copy=False,
         group_expand="_group_expand_stage_id",
         domain="[('voucher_type_id', '=', voucher_type_id)]",
     )

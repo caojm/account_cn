@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-27 02:56+0000\n"
-"PO-Revision-Date: 2023-07-27 12:18+0800\n"
+"POT-Creation-Date: 2023-08-01 10:13+0000\n"
+"PO-Revision-Date: 2023-08-01 18:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -38,6 +38,7 @@ msgstr "科目"
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_account_balance_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_account_balance_report
+#: model:ir.model,name:account_cn.model_report_account_cn_account_balance
 #: model:ir.ui.menu,name:account_cn.account_cn_account_balance_menu
 msgid "Account Balance"
 msgstr "科目余额表"
@@ -53,24 +54,15 @@ msgid "Account Code Length"
 msgstr "科目代码长度"
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_line
-msgid "Account Voucher Entry"
-msgstr "凭证分录"
+#: model:ir.actions.act_window,name:account_cn.account_cn_account_tag_action
+#: model:ir.ui.menu,name:account_cn.account_cn_account_tag_menu
+msgid "Account Tags"
+msgstr "科目标签"
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_tag
-msgid "Account Voucher Tag"
-msgstr "凭证标签"
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_type
-msgid "Account Voucher Type"
-msgstr "凭证类型"
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_account_cn_voucher_word
-msgid "Account Voucher Word"
-msgstr "凭证字"
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__account_tag_ids
+msgid "Account tag"
+msgstr "科目标签"
 
 #. module: account_cn
 #: model:ir.ui.menu,name:account_cn.account_cn_configuration_accounting_menu
@@ -107,15 +99,6 @@ msgstr "会计设置"
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__accounting_supervisor_id
 msgid "Accounting Supervisor"
 msgstr "会计主管"
-
-#. module: account_cn
-#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_action
-#: model:ir.actions.report,name:account_cn.action_account_cn_voucher_report
-#: model:ir.model,name:account_cn.model_account_cn_voucher
-#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_menu
-#: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
-msgid "Manage Voucher"
-msgstr "凭证管理"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__active
@@ -172,11 +155,17 @@ msgid "Casher"
 msgstr "出纳"
 
 #. module: account_cn
+#: model:ir.ui.menu,name:account_cn.account_cn_account_menu
+msgid "Chart of Accounts"
+msgstr "科目表"
+
+#. module: account_cn
 #: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_view_form
 msgid "Check"
 msgstr "审核"
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_checked
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__checked
 msgid "Checked"
 msgstr "已审核"
@@ -208,7 +197,7 @@ msgstr "颜色"
 #. module: account_cn
 #: model:ir.model,name:account_cn.model_res_company
 msgid "Companies"
-msgstr "公司"
+msgstr "多公司"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__company_id
@@ -261,7 +250,7 @@ msgstr "接续编号"
 #: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__create_uid
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__create_uid
 msgid "Created by"
-msgstr "创建"
+msgstr "创建者"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__create_date
@@ -276,7 +265,7 @@ msgstr "创建"
 #: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__create_date
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__create_date
 msgid "Created on"
-msgstr "创建在"
+msgstr "创建于"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__credit
@@ -357,6 +346,7 @@ msgid "Distinguish Partner"
 msgstr "区分业务伙伴"
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_draft
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__draft
 msgid "Draft"
 msgstr "草稿"
@@ -387,6 +377,7 @@ msgstr "折叠"
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_general_ledger_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_general_ledger_report
+#: model:ir.model,name:account_cn.model_report_account_cn_general_ledger
 #: model:ir.ui.menu,name:account_cn.account_cn_general_ledger_menu
 msgid "General Ledger"
 msgstr "总分类账"
@@ -410,6 +401,12 @@ msgstr "总分类账向导"
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__id
 msgid "ID"
 msgstr "ID"
+
+#. module: account_cn
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__include_cash_flow
+#: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__include_cash_flow
+msgid "Include Cash Flow"
+msgstr "包含现金流"
 
 #. module: account_cn
 #. odoo-python
@@ -451,7 +448,7 @@ msgstr "最后修改于"
 #: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__write_uid
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__write_uid
 msgid "Last Updated by"
-msgstr "最后更新"
+msgstr "最后更新者"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__write_date
@@ -479,9 +476,15 @@ msgid "Locked"
 msgstr "已锁定"
 
 #. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_voucher_action
+#: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_menu
+msgid "Manage Voucher"
+msgstr "凭证管理"
+
+#. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__max_account_code_length
 msgid "Max Account Code Length"
-msgstr "最大科目代码长度"
+msgstr "最大科目码长"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_accounting_book__name
@@ -511,6 +514,11 @@ msgid "Number"
 msgstr "号"
 
 #. module: account_cn
+#: model:ir.model.fields,help:account_cn.field_account_cn_voucher_line__account_tag_ids
+msgid "Optional tags you may want to assign for custom reporting"
+msgstr "您可能想为自定义报告分配的可选标签"
+
+#. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__partner_ids
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__partner_id
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__partner_ids
@@ -530,9 +538,10 @@ msgid "Post"
 msgstr "过账"
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_posted
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__posted
 msgid "Posted"
-msgstr "已过帐"
+msgstr "已过账"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__posted_only
@@ -540,7 +549,7 @@ msgstr "已过帐"
 #: model:ir.model.fields,field_description:account_cn.field_renumber_voucher_wizard__posted_only
 #: model:ir.model.fields,field_description:account_cn.field_subsidiary_ledger_wizard__posted_only
 msgid "Posted Only"
-msgstr "仅已过帐"
+msgstr "仅已过账"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__poster_id
@@ -548,6 +557,7 @@ msgid "Poster"
 msgstr "过账人"
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_prepared
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__prepared
 msgid "Prepared"
 msgstr "已制单"
@@ -572,7 +582,7 @@ msgstr "重新编号"
 #: model:ir.model,name:account_cn.model_renumber_voucher_wizard
 #: model:ir.ui.menu,name:account_cn.account_cn_account_renumber_voucher_menu
 msgid "Renumber Voucher"
-msgstr "重新编号凭证"
+msgstr "凭证重新编号"
 
 #. module: account_cn
 #: model:ir.model,name:account_cn.model_report_abstract_wizard
@@ -606,9 +616,16 @@ msgid "Signature"
 msgstr "签章"
 
 #. module: account_cn
+#: model:account.cn.voucher.stage,name:account_cn.stage_signed
 #: model:ir.model.fields.selection,name:account_cn.selection__account_cn_voucher_stage__state__signed
 msgid "Signed"
 msgstr "已签字"
+
+#. module: account_cn
+#: model:ir.actions.act_window,name:account_cn.account_cn_spreadsheet_action
+#: model:ir.ui.menu,name:account_cn.account_cn_spreadsheet_menu
+msgid "Spreadsheets"
+msgstr "电子表格"
 
 #. module: account_cn
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__stage_id
@@ -630,6 +647,7 @@ msgstr "状态"
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.action_subsidiary_ledger_wizard
 #: model:ir.actions.report,name:account_cn.action_account_cn_subsidiary_ledger_report
+#: model:ir.model,name:account_cn.model_report_account_cn_subsidiary_ledger
 #: model:ir.ui.menu,name:account_cn.account_cn_subsidiary_ledger_menu
 msgid "Subsidiary Ledger"
 msgstr "明细分类账"
@@ -754,6 +772,8 @@ msgid "View"
 msgstr "查看"
 
 #. module: account_cn
+#: model:ir.actions.report,name:account_cn.action_account_cn_voucher_report
+#: model:ir.model,name:account_cn.model_account_cn_voucher
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_line__voucher_id
 #: model:ir.ui.menu,name:account_cn.account_cn_configuration_voucher_menu
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_menu
@@ -765,6 +785,11 @@ msgstr "记账凭证"
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_line_action
 #: model:ir.ui.menu,name:account_cn.account_cn_account_voucher_line_menu
 msgid "Voucher Entries"
+msgstr "凭证分录"
+
+#. module: account_cn
+#: model:ir.model,name:account_cn.model_account_cn_voucher_line
+msgid "Voucher Entry"
 msgstr "凭证分录"
 
 #. module: account_cn
@@ -789,12 +814,14 @@ msgstr "凭证阶段"
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_tag_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_tag
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_tag_menu
 msgid "Voucher Tag"
 msgstr "凭证标签"
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_type_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_type
 #: model:ir.model.fields,field_description:account_cn.field_account_balance_wizard__voucher_type_ids
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher__voucher_type_id
 #: model:ir.model.fields,field_description:account_cn.field_account_cn_voucher_stage__voucher_type_id
@@ -809,6 +836,7 @@ msgstr "凭证类型"
 
 #. module: account_cn
 #: model:ir.actions.act_window,name:account_cn.account_cn_voucher_word_action
+#: model:ir.model,name:account_cn.model_account_cn_voucher_word
 #: model:ir.model.fields,field_description:account_cn.field_res_users__voucher_word_id
 #: model:ir.ui.menu,name:account_cn.account_cn_voucher_word_menu
 #: model_terms:ir.ui.view,arch_db:account_cn.account_cn_voucher_word_view_form
@@ -823,19 +851,9 @@ msgid "Word"
 msgstr "字"
 
 #. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_account_balance
-msgid "report.account_cn.account_balance"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_general_ledger
-msgid "report.account_cn.general_ledger"
-msgstr ""
-
-#. module: account_cn
-#: model:ir.model,name:account_cn.model_report_account_cn_subsidiary_ledger
-msgid "report.account_cn.subsidiary_ledger"
-msgstr ""
+#: model:ir.model,name:account_cn.model_account_cn_report_abstract
+msgid "Report Abstract"
+msgstr "抽象报表"
 
 #. module: account_cn
 #: model_terms:ir.ui.view,arch_db:account_cn.account_balance
@@ -932,7 +950,6 @@ msgid "日期"
 msgstr ""
 
 #. module: account_cn
-#: model_terms:ir.ui.view,arch_db:account_cn.general_ledger
 #: model_terms:ir.ui.view,arch_db:account_cn.subsidiary_ledger
 msgid "明细分类账"
 msgstr ""

@@ -1,7 +1,7 @@
 {
     "name": "Chinese Accounting",
     "version": "1.0",
-    "depends": ["base", "account"],
+    "depends": ["base", "account_accountant", "documents"],
     "author": "Cao Jiaming",
     "category": "Category",
     "description": """

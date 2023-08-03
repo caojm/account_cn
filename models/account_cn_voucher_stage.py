@@ -3,12 +3,13 @@ from odoo import fields, models
 
 class AccountCnVoucherStage(models.Model):
     _name = "account.cn.voucher.stage"
+    _check_company_auto = True
     _description = "Voucher Stage"
     _order = "sequence"
 
     company_id = fields.Many2one(
         "res.company",
-        required=True,
+        # required=True,
         default=lambda self: self.env.company,
     )
     code = fields.Char(
@@ -36,4 +37,5 @@ class AccountCnVoucherStage(models.Model):
     )
     voucher_type_id = fields.Many2one(
         "account.cn.voucher.type",
+        check_company=True,
     )

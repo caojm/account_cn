@@ -10,12 +10,13 @@
     <field name="model">account.cn.voucher.stage</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="sequence" widget="handle"/>
-        <field name="code"/>
-        <field name="name"/>
-        <field name="voucher_type_id"/>
-        <field name="state" optional="hide"/>
-        <field name="fold" optional="hide"/>
+        <field name="sequence" widget="handle" />
+        <field name="code" />
+        <field name="name" />
+        <field name="voucher_type_id" />
+        <field name="state" optional="hide" />
+        <field name="fold" optional="hide" />
+        <field name="company_id" optional="hide" />
       </tree>
     </field>
   </record>
@@ -27,14 +28,15 @@
         <sheet>
           <group>
             <group>
-              <field name="code"/>
-              <field name="name"/>
-              <field name="state"/>
+              <field name="code" />
+              <field name="name" />
+              <field name="state" />
             </group>
             <group>
-              <field name="voucher_type_id"/>
-              <field name="sequence"/>
-              <field name="fold"/>
+              <field name="voucher_type_id" />
+              <field name="sequence" />
+              <field name="fold" />
+              <field name="company_id" />
             </group>
           </group>
         </sheet>

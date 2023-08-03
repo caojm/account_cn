@@ -7,7 +7,7 @@ class AccountCnVoucherTag(models.Model):
 
     company_id = fields.Many2one(
         "res.company",
-        required=True,
+        # required=True,
         default=lambda self: self.env.company,
     )
     name = fields.Char(

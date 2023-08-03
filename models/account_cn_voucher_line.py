@@ -4,7 +4,7 @@ from odoo import api, fields, models
 
 class AccountCnVoucherLine(models.Model):
     _name = "account.cn.voucher.line"
-    _inherit = "analytic.mixin"
+    _check_company_auto = True
     _description = "Voucher Entry"
 
     voucher_id = fields.Many2one(
@@ -97,6 +97,7 @@ class AccountCnVoucherLine(models.Model):
     )
     tag_ids = fields.Many2many(
         "account.cn.voucher.tag",
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
     )
 
     @api.depends("voucher_id")

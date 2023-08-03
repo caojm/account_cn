@@ -10,10 +10,10 @@
     <field name="model">account.cn.voucher.word</field>
     <field name="arch" type="xml">
       <tree editable="bottom">
-        <field name="code"/>
-        <field name="name"/>
-        <field name="voucher_number_sequence_id"/>
-        <field name="company_id" optional="hide"/>
+        <field name="code" />
+        <field name="name" />
+        <field name="voucher_number_sequence_id" />
+        <field name="company_id" optional="hide" />
       </tree>
     </field>
   </record>
@@ -24,9 +24,10 @@
       <form string="Voucher Word">
         <sheet>
           <group>
-            <field name="code"/>
-            <field name="name"/>
-            <field name="voucher_number_sequence_id"/>
+            <field name="code" />
+            <field name="name" />
+            <field name="voucher_number_sequence_id" />
+            <field name="company_id" />
           </group>
         </sheet>
       </form>

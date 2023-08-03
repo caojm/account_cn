@@ -46,6 +46,7 @@ class AccountCnVoucher(models.Model):
     voucher_type_id = fields.Many2one(
         "account.cn.voucher.type",
         required=True,
+        check_company=True,
         default=lambda self: self.env.user.voucher_type_id,
     )
     number = fields.Integer(

@@ -10,8 +10,9 @@
     <field name="model">account.cn.voucher.tag</field>
     <field name="arch" type="xml">
       <tree editable="bottom">
-        <field name="name"/>
-        <field name="color" widget="color_picker"/>
+        <field name="name" />
+        <field name="color" widget="color_picker" />
+        <field name="company_id" optional="hide" />
       </tree>
     </field>
   </record>

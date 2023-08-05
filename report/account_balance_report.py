@@ -1,18 +1,5 @@
-import calendar
-import datetime
-
 from odoo import api, fields, models, _
 from odoo.fields import Date
-from odoo.tools import (
-    date_utils,
-    float_compare,
-    float_is_zero,
-    float_repr,
-    format_amount,
-    format_date,
-    formatLang,
-    get_lang,
-)
 
 
 class AccountBalanceReport(models.AbstractModel):
@@ -27,11 +14,11 @@ class AccountBalanceReport(models.AbstractModel):
         else:
             accounts = self.env["account.account"].search([])
         max_account_code_length = data["max_account_code_length"]
-        account_code_name = [
-            (account.code, account.name)
+        account_code_name = {
+            account.code: account.name
             for account in accounts
             if len(account.code) <= max_account_code_length
-        ]
+        }
         account_balance = self._generate_account_balance(
             data,
             account_code_name,
@@ -43,55 +30,55 @@ class AccountBalanceReport(models.AbstractModel):
 
     def _get_voucher_data(
         self,
-        data_type,
-        company_ids,
-        accounting_book_ids,
-        account_code,
-        exact_match,
+        data,
+        account_code_name,
         date_from,
         date_to,
-        posted_only,
-        distinguish_partner,
-        partner_ids,
-        voucher_type_ids,
-        tag_ids,
+        data_type,
     ):
         domain = [
-            ("company_id", "in", company_ids),
-            ("accounting_book_id", "in", accounting_book_ids),
+            ("company_id", "in", data["company_ids"]),
+            ("accounting_book_id", "in", data["accounting_book_ids"]),
         ]
         if data_type == "balance":
             domain += [("date", "<", date_from)]
         elif data_type == "amount":
-            domain += [("date", ">=", date_from), ("date", "<=", date_to)]
+            domain += [
+                ("date", ">=", date_from),
+                ("date", "<=", date_to),
+            ]
         else:
             return False
-        if exact_match:
-            domain += [("account_id.code", "=", account_code)]
-        else:
-            domain += [("account_id.code", "=like", account_code + "%")]
-        if posted_only:
+        if data["posted_only"]:
             domain += [("voucher_state", "=", "posted")]
-        if voucher_type_ids:
-            domain += [("voucher_type_id", "in", voucher_type_ids)]
-        if tag_ids:
-            domain += [("tag_ids", "in", tag_ids)]
+        if data["voucher_type_ids"]:
+            domain += [("voucher_type_id", "in", data["voucher_type_ids"])]
+        if data["tag_ids"]:
+            domain += [("tag_ids", "in", data["tag_ids"])]
 
-        fields = []
-        groupby = []
-        orderby = False
-        if distinguish_partner:
-            domain += [("partner_id", "in", partner_ids)]
+        fields = ["account_code"]
+        groupby = ["account_code"]
+        orderby = "account_code"
+        if data["distinguish_partner"]:
+            domain += [("partner_id", "in", data["partner_ids"])]
             fields += ["partner_id"]
-            groupby = ["partner_id"]
-            orderby = "partner_id"
-        else:
-            groupby = ["company_id"]
+            groupby += ["partner_id"]
+            orderby += ", partner_id"
         fields += [
-            # "company_id",
             "debit:sum",
             "credit:sum",
         ]
+        if data["exact_match"]:
+            account_code = list(account_code_name.keys())
+            domain += [("account_code", "in", account_code)]
+        else:
+            account_code = self._filter_account_code(account_code_name)
+            if len(account_code) == 1:
+                domain += [("account_code", "=like", account_code[0] + "%")]
+            else:
+                for acc in account_code[:-1]:
+                    domain += ["|", ("account_code", "=like", acc + "%")]
+                domain += [("account_code", "=like", account_code[-1] + "%")]
         data = self.env["account.cn.voucher.line"].read_group(
             domain=domain,
             fields=fields,
@@ -101,7 +88,24 @@ class AccountBalanceReport(models.AbstractModel):
         )
         return data
 
-    def _generate_account_balance(self, data, accounts):
+    def _filter_account_code(self, account_code_name):
+        account_code = sorted(account_code_name.keys())
+        account_code_yes = set()
+        account_code_no = set()
+        for ac in account_code:
+            find_parent = False
+            for i in range(1, len(ac)):
+                if ac[:-i] in account_code_yes or ac[:-i] in account_code_no:
+                    find_parent = True
+                    account_code_no.add(ac)
+                    break
+                else:
+                    continue
+            if not find_parent:
+                account_code_yes.add(ac)
+        return sorted(account_code_yes)
+
+    def _generate_account_balance(self, data, account_code_name):
         account_balance = []
         total = {
             "account_code": False,
@@ -116,56 +120,43 @@ class AccountBalanceReport(models.AbstractModel):
             "closing_balance_debit": 0.0,
             "closing_balance_credit": 0.0,
         }
-        for account in accounts:
-            initial_balance_data = self._get_voucher_data(
-                "balance",
-                data["company_ids"],
-                data["accounting_book_ids"],
-                account[0],
-                data["exact_match"],
-                data["date_from"],
-                data["date_to"],
-                data["posted_only"],
-                data["distinguish_partner"],
-                data["partner_ids"],
-                data["voucher_type_ids"],
-                data["tag_ids"],
+        initial_balance_data = self._get_voucher_data(
+            data,
+            account_code_name,
+            data["date_from"],
+            data["date_to"],
+            "balance",
+        )
+        this_amount_data = self._get_voucher_data(
+            data,
+            account_code_name,
+            data["date_from"],
+            data["date_to"],
+            "amount",
+        )
+        year_amount_data = self._get_voucher_data(
+            data,
+            account_code_name,
+            self._this_year_start(Date.to_date(data["date_to"])),
+            data["date_from"],
+            "amount",
+        )
+
+        account_code = sorted(account_code_name.keys())
+        for ac in account_code:
+            is_starts_with = lambda x: x["account_code"].startswith(ac)
+            initial_balance_data_filtered = list(
+                filter(is_starts_with, initial_balance_data)
             )
-            this_amount_data = self._get_voucher_data(
-                "amount",
-                data["company_ids"],
-                data["accounting_book_ids"],
-                account[0],
-                data["exact_match"],
-                data["date_from"],
-                data["date_to"],
-                data["posted_only"],
-                data["distinguish_partner"],
-                data["partner_ids"],
-                data["voucher_type_ids"],
-                data["tag_ids"],
-            )
-            year_amount_data = self._get_voucher_data(
-                "amount",
-                data["company_ids"],
-                data["accounting_book_ids"],
-                account[0],
-                data["exact_match"],
-                self._this_year_start(Date.to_date(data["date_to"])),
-                data["date_to"],
-                data["posted_only"],
-                data["distinguish_partner"],
-                data["partner_ids"],
-                data["voucher_type_ids"],
-                data["tag_ids"],
-            )
-            if initial_balance_data or this_amount_data:
+            this_amount_data_filtered = list(filter(is_starts_with, this_amount_data))
+            year_amount_data_filtered = list(filter(is_starts_with, year_amount_data))
+            if initial_balance_data_filtered or this_amount_data_filtered:
                 account_balance += self._make_account_balance(
                     data,
-                    account,
-                    initial_balance_data,
-                    this_amount_data,
-                    year_amount_data,
+                    (ac, account_code_name[ac]),
+                    initial_balance_data_filtered,
+                    this_amount_data_filtered,
+                    year_amount_data_filtered,
                 )
                 total["opening_balance_debit"] += account_balance[-1][
                     "opening_balance_debit"
@@ -211,6 +202,10 @@ class AccountBalanceReport(models.AbstractModel):
                 "closing_balance_debit": 0.0,
                 "closing_balance_credit": 0.0,
             }
+            partners = {
+                p.id: p.name
+                for p in self.env["res.partner"].browse(data["partner_ids"])
+            }
             for partner_id in data["partner_ids"]:
                 item = {
                     "account_code": account_code_name[0],
@@ -225,7 +220,7 @@ class AccountBalanceReport(models.AbstractModel):
                     "closing_balance_debit": 0.0,
                     "closing_balance_credit": 0.0,
                 }
-                item["partner_name"] = self.env["res.partner"].browse([partner_id]).name
+                item["partner_name"] = partners[partner_id]
                 item["opening_balance_debit"] = sum(
                     map(
                         lambda x: x["debit"],
